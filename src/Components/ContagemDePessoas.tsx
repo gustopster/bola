@@ -21,7 +21,7 @@ function ContagemDePessoas() {
       return;
     }
     setPessoas(pessoas + 1);
-    setAplicarMargin({marginBottom: "25vh", marginTop:'12.5vh',})
+    setAplicarMargin({marginBottom: "18vh", marginTop:'12.5vh',})
     setProntoPraEnviar(true); // Habilitar o botão enviar contagem
     setDica({ texto: dica.texto, className: 'aviso' });
   };
