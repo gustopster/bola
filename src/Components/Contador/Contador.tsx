@@ -21,11 +21,10 @@ function ContagemDePessoas() {
       return;
     }
     setPessoas(pessoas + 1);
-    setAplicarMargin({marginBottom: "18vh", marginTop:'12.5vh',})
+    setAplicarMargin({ marginBottom: "18vh", marginTop: '12.5vh', })
     setProntoPraEnviar(true); // Habilitar o botão enviar contagem
     setDica({ texto: dica.texto, className: 'aviso' });
   };
-
   const enviarContagem = () => {
     if (!prontoPraEnviar) { // Verifica se é possível enviar a contagem
       setDica({ texto: 'Por favor, faça a contagem e insira o número do WhatsApp antes de enviar.', className: 'avisoErro' });
@@ -45,6 +44,7 @@ function ContagemDePessoas() {
   };
   return (
     <>
+      <p style={{ fontSize: '9vh', marginTop: '10vh', }}>Contador</p>
       <p className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</p>
       {!prontoPraEnviar &&
         <>
@@ -55,7 +55,7 @@ function ContagemDePessoas() {
         <label className='labelWhats'>WhatsApp:
           <input type="text" inputMode="numeric" maxLength={11} placeholder='DDD/Número' className='inputWhats' onChange={handleWhatsChange} />
         </label>
-        <div style={{marginTop:'5vh', fontSize:"3vh"}}>
+        <div style={{ marginTop: '5vh', fontSize: "3vh" }}>
           <button id={`${enviadoComSucesso}`} className='botaoContar' onClick={verificarWhats}>
             Click para contar
           </button>
@@ -63,7 +63,7 @@ function ContagemDePessoas() {
         {enviadoComSucesso ? (
           <p className='labelResposta'>{dica.texto}</p>
         ) : (
-          <div style={{marginTop:'5vh', fontSize:"3vh"}}>
+          <div style={{ marginTop: '5vh', fontSize: "3vh" }}>
             <button onClick={enviarContagem}>
               Enviar Total
             </button>
