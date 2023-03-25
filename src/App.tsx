@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div>
-        <p style={{fontSize:'28px', marginTop:'10%',}}>Contador</p>
+        <p style={{fontSize:'9vh', marginTop:'10vh',}}>Contador</p>
         <ContagemDePessoas />
       </div>
     </>
