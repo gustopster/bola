@@ -55,7 +55,7 @@ function ContagemDePessoas() {
         <label className='labelWhats'>WhatsApp:
           <input type="text" inputMode="numeric" maxLength={11} placeholder='DDD/Número' className='inputWhats' onChange={handleWhatsChange} />
         </label>
-        <div style={{marginTop:'10px',}}>
+        <div style={{marginTop:'10px', fontSize:"3vh"}}>
           <button id={`${enviadoComSucesso}`} className='botaoContar' onClick={verificarWhats}>
             Click para contar
           </button>
@@ -63,7 +63,7 @@ function ContagemDePessoas() {
         {enviadoComSucesso ? (
           <p className='labelResposta'>{dica.texto}</p>
         ) : (
-          <div style={{marginTop:'10px',}}>
+          <div style={{marginTop:'10px', fontSize:"3vh"}}>
             <button onClick={enviarContagem}>
               Enviar Total
             </button>
