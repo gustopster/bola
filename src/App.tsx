@@ -1,5 +1,5 @@
 import './Global.css'
-import ContagemDePessoas from './Components/ContagemDePessoas'
+import ContagemDePessoas from './Components/Contador/Contador'
 function App() {
   return (
     <>

@@ -1,5 +1,5 @@
-import React, { CSSProperties, HtmlHTMLAttributes, useEffect, useState } from 'react';
-
+import React, { CSSProperties, useState } from 'react';
+import './Contador.css'
 function ContagemDePessoas() {
   const [pessoas, setPessoas] = useState(0);
   const [enviadoComSucesso, setenviadoComSucesso] = useState('');
