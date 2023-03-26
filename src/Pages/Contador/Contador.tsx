@@ -1,6 +1,6 @@
 import React, { CSSProperties, useState } from 'react';
 import './Contador.css'
-function ContagemDePessoas() {
+function Contador() {
   const [pessoas, setPessoas] = useState(0);
   const [enviadoComSucesso, setenviadoComSucesso] = useState('');
   const [whats, setWhats] = useState('');
@@ -73,4 +73,4 @@ function ContagemDePessoas() {
     </>
   );
 }
-export default ContagemDePessoas;
+export default Contador;

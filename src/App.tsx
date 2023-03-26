@@ -1,12 +1,11 @@
+import { BrowserRouter } from 'react-router-dom';
+import { Apps } from './Routes/Rotas';
 import './Global.css'
-import ContagemDePessoas from './Components/Contador/Contador'
 function App() {
   return (
-    <>
-      <div>
-        <ContagemDePessoas />
-      </div>
-    </>
+    <BrowserRouter>
+      <Apps />
+    </BrowserRouter>
   )
 }
 export default App
