@@ -45,7 +45,6 @@ function Contador() {
   };
   return (
     <>
-    <MenuHamburger />
       <p style={{ fontSize: '9vh', marginTop: '10vh', }}>Contador</p>
       <p className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</p>
       {!prontoPraEnviar &&

@@ -5,7 +5,6 @@ function Visitantes() {
   
   return (
     <>
-    <MenuHamburger />
       Visitantes
     </>
   );
