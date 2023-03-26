@@ -5,11 +5,6 @@
     margin-top: 12.5vh;
     font-size: 4vh;
   }
-  .labelResposta {
-    font-size: 1rem;
-    margin-top: 50px;
-    color: green;
-  }
   #enviado {
     display: none;
   }
@@ -44,4 +39,14 @@
     color: red;
     margin-top: 12.5vh;
     font-size: 1rem;
+  }
+  .botaoEnviar {
+    margin: 9%;
+    top: 0;
+    right: 0;
+    position: absolute;
+    background-color: green;
+  }
+  .botaoContar{
+    background-color: blue;
   }

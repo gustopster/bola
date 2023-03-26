@@ -1,4 +1,5 @@
 import React, { CSSProperties, useState } from 'react';
+import MenuHamburger from '../../Components/MenuHambuger.tsx';
 import './Contador.css'
 function Contador() {
   const [pessoas, setPessoas] = useState(0);
@@ -44,6 +45,7 @@ function Contador() {
   };
   return (
     <>
+    <MenuHamburger />
       <p style={{ fontSize: '9vh', marginTop: '10vh', }}>Contador</p>
       <p className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</p>
       {!prontoPraEnviar &&
@@ -55,16 +57,16 @@ function Contador() {
         <label className='labelWhats'>WhatsApp:
           <input type="text" inputMode="numeric" maxLength={11} placeholder='DDD/Número' className='inputWhats' onChange={handleWhatsChange} />
         </label>
-        <div style={{ marginTop: '5vh', fontSize: "3vh" }}>
+        <div style={{ marginTop: '2vh', fontSize: "3vh" }}>
           <button id={`${enviadoComSucesso}`} className='botaoContar' onClick={verificarWhats}>
             Click para contar
           </button>
         </div>
         {enviadoComSucesso ? (
-          <p className='labelResposta'>{dica.texto}</p>
+          <p>{dica.texto}</p>
         ) : (
-          <div style={{ marginTop: '5vh', fontSize: "3vh" }}>
-            <button onClick={enviarContagem}>
+          <div style={{ marginTop: '0vh', fontSize: "3vh" }}>
+            <button className='botaoEnviar' onClick={enviarContagem}>
               Enviar Total
             </button>
           </div>
