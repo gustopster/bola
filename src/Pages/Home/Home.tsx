@@ -1,11 +1,10 @@
-import React, { CSSProperties, useState } from 'react';
-import MenuHamburger from '../../Components/MenuHambuger.tsx';
+import Versiculo from '../../Components/Versiculo/Versiculo';
 import './Home.css'
 function Home() {
   
   return (
     <>
-      HOME
+      <Versiculo/>
     </>
   );
 }
