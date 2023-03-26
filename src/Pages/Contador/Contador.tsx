@@ -7,7 +7,7 @@ function Contador() {
   const [whats, setWhats] = useState('');
   const [prontoPraEnviar, setProntoPraEnviar] = useState(false); // variável para verificar se é possível enviar a contagem
   const [dica, setDica] = useState({
-    texto: 'DICA: Informe o número WhatsApp e não esqueça de realizar a contagem das pessoas!',
+    texto: 'DICA: Informe o número WhatsApp para começar a contagem!',
     className: 'aviso'
   });
   const [aplicarMargin, setAplicarMargin] = useState<CSSProperties>();
