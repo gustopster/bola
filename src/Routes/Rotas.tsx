@@ -5,15 +5,15 @@ import Visitantes from '../Pages/Visitantes/Visitantes';
 
 export const Apps = () => {
   const routes = [
-    { path: "/bola/", element: <Home /> },
-    { path: "/bola/contador", element: <Contador /> },
-    { path: "/bola/visitantes", element: <Visitantes /> },
+    { path: "bola/", element: <Home /> },
+    { path: "bola/contador", element: <Contador /> },
+    { path: "bola/visitantes", element: <Visitantes /> },
   ];
 
   return (
     <Routes>
       {routes.map(({ path, element }) => (
-        <Route key={path} path={`${process.env.PUBLIC_URL}${path}`} element={element} />
+        <Route key={path} path={path} element={element} />
       ))}
     </Routes>
   );
