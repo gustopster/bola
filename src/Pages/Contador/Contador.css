@@ -40,6 +40,11 @@
     margin-top: 12.5vh;
     font-size: 1rem;
   }
+  .avisoSucesso{
+    text-decoration: underline;
+    color: green;
+    font-size: 1rem;
+  }
   .botaoEnviar {
     margin: 9%;
     top: 0;

@@ -62,7 +62,7 @@ function Contador() {
           </button>
         </div>
         {enviadoComSucesso ? (
-          <p>{dica.texto}</p>
+          <p className='avisoSucesso'>{dica.texto}</p>
         ) : (
           <div style={{ marginTop: '0vh', fontSize: "3vh" }}>
             <button className='botaoEnviar' onClick={enviarContagem}>
