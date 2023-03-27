@@ -8,6 +8,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import HomeIcon from '@mui/icons-material/Home';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import VisitorsIcon from '@mui/icons-material/Group';
 import "./index.css"
 type Anchor = 'left';
 export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: string) => void }) {
@@ -40,7 +43,7 @@ export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: stri
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleTextMenu(text)}>
               <ListItemIcon>
-                Icon
+                {index === 0 ? <HomeIcon /> : index === 1 ? <CalculateIcon /> : <VisitorsIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
