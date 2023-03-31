@@ -10,3 +10,33 @@
     background-position: center;
     text-align: center;
 }
+.menuHamburgerBotao{
+    position: absolute !important;
+    background-color: white !important;
+    color: black !important;
+    left: 0 !important;
+    top: 0 !important;
+    margin-left: 1% !important;
+    margin-top: 1% !important;
+}
+.versiculoDiv{
+    display: inline-flexbox;
+    position: absolute;
+    padding: 0.5%;
+    margin-top: 25vh;
+    width: 95%;
+}
+.contadorDiv{
+    display: inline-flexbox;
+    position: absolute;
+    padding: 0.5%;
+    margin-top: 25vh;
+    width: 95%;
+}
+.visitantesDiv{
+    display: inline-flexbox;
+    position: absolute;
+    padding: 0.5%;
+    margin-top: 25vh;
+    width: 95%;
+}

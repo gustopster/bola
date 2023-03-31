@@ -44,7 +44,7 @@ function Visitantes() {
   const visitantes = JSON.parse(localStorage.getItem('visitantes') || '[]');
   return (
     <>
-      <div className='formContainer'>
+      <div className='visitantesDiv'>
         <h1>Visitantes Registrados: {visitantes.length > 0 ? visitantes.length : 0}</h1>
         <form onSubmit={handleSubmit}>
           <div>

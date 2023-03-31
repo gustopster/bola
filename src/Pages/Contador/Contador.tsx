@@ -20,7 +20,7 @@ function Contador() {
   };
   return (
     <>
-      <div id='container'>
+      <div className='contadorDiv'>
         <h1>Contador</h1>
         <h2 className='totalPessoas'> {pessoas} Pessoas</h2>
         <div>
