@@ -43,18 +43,19 @@ function Contador() {
   };
   return (
     <>
-      <h1 style={{ fontSize: '9vh', marginTop: '10vh', }}>Contador</h1>
-      <h2 className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</h2>
-      {!prontoPraEnviar &&
-        <>
-          <h2 className={dica.className}>{dica.texto}</h2>
-        </>
-      }
       <div id='container'>
+        <h1>Contador</h1>
+        {!prontoPraEnviar &&
+          <>
+            <p className={dica.className}>{dica.texto}</p>
+          </>
+        }
         <label className='labelWhats'><h3>WhatsApp:</h3>
           <input type="text" inputMode="numeric" maxLength={11} placeholder='DDD/Número' className='inputWhats' onChange={handleWhatsChange} />
         </label>
-        <div style={{ marginTop: '2vh', fontSize: "3vh" }}>
+        <h2 className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</h2>
+
+        <div>
           <button id={`${enviadoComSucesso}`} className='botaoContar' onClick={verificarWhats}>
             Click para contar
           </button>
@@ -62,7 +63,7 @@ function Contador() {
         {enviadoComSucesso ? (
           <p className='avisoSucesso'>{dica.texto}</p>
         ) : (
-          <div style={{ marginTop: '0vh', fontSize: "3vh" }}>
+          <div>
             <button className='botaoEnviar' onClick={enviarContagem}>
               Enviar Total
             </button>

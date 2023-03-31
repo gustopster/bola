@@ -1,0 +1,11 @@
+:root{
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.849);
+    color: white;
+    background-image: url(../bola-de-neve-logo-preto.webp);
+    background-size: 45vh 45vh;
+    background-position: center;
+}

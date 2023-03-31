@@ -32,64 +32,74 @@ function Visitantes() {
     }
     if (window.confirm('Após enviar a lista para o WhatsApp, os dados serão excluídos. Deseja mesmo continuar?')) {
       const mensagem = visitantes
-  .map((visitante, index) => `${index+1}. ${visitante.nome} - ${visitante.whatsApp} - ${visitante.email} - ${visitante.bairro} - ${visitante.celulaSugerida}`)
-  .join('                                                                                                                                                   ');
+        .map((visitante, index) => `${index + 1}. ${visitante.nome} - ${visitante.whatsApp} - ${visitante.email} - ${visitante.bairro} - ${visitante.celulaSugerida}`)
+        .join('                                                                                                                                                   ');
 
       const url = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
       window.open(url);
       localStorage.removeItem('visitantes');
     }
   };
-  
+
   const visitantes = JSON.parse(localStorage.getItem('visitantes') || '[]');
   return (
     <>
       <div className='formContainer'>
-        <h1>Visitantes Registrados Hoje: {visitantes.length > 0 ? visitantes.length : 0}</h1>
+        <h1>Visitantes Registrados: {visitantes.length > 0 ? visitantes.length : 0}</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="nome">Nome:</label>
-          <input
-            type="text"
-            id="nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-          />
-          <label htmlFor="whatsapp">WhatsApp:</label>
-          <input
-            type="text"
-            id="whatsapp"
-            value={whatsApp}
-            onChange={(e) => setWhatsApp(e.target.value)}
-            required
-          />
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor="celula">Célula sugerida:</label>
-          <input
-            type="text"
-            id="celula"
-            value={celulaSugerida}
-            onChange={(e) => setCelulaSugerida(e.target.value)}
-            required
-          />
-          <label htmlFor="bairro">Bairro:</label>
-          <input
-            type="text"
-            id="bairro"
-            value={bairro}
-            onChange={(e) => setBairro(e.target.value)}
-            required
-          />
+          <div>
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="whatsapp">Whats:</label>
+            <input
+              type="text"
+              id="whatsapp"
+              value={whatsApp}
+              onChange={(e) => setWhatsApp(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email">E-mail:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="celula">Célula:</label>
+            <input
+              type="text"
+              id="celula"
+              value={celulaSugerida}
+              onChange={(e) => setCelulaSugerida(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="bairro">Bairro:</label>
+            <input
+              type="text"
+              id="bairro"
+              value={bairro}
+              onChange={(e) => setBairro(e.target.value)}
+              required
+            />
+          </div>
           <button className='botaoAdicionar' type="submit">Adicionar visitante</button>
+          <button onClick={handleEnviar}>Enviar lista para o WhatsApp</button>
         </form>
-        <button onClick={handleEnviar}>Enviar lista para o WhatsApp</button>
       </div>
     </>
   );
