@@ -1,6 +1,4 @@
 import React, { CSSProperties, useState } from 'react';
-import MenuHamburger from '../../Components/MenuHambuger.tsx';
-import './Contador.css'
 function Contador() {
   const [pessoas, setPessoas] = useState(0);
   const [enviadoComSucesso, setenviadoComSucesso] = useState('');
@@ -45,15 +43,15 @@ function Contador() {
   };
   return (
     <>
-      <p style={{ fontSize: '9vh', marginTop: '10vh', }}>Contador</p>
-      <p className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</p>
+      <h1 style={{ fontSize: '9vh', marginTop: '10vh', }}>Contador</h1>
+      <h2 className='totalPessoas' style={aplicarMargin}> {pessoas} Pessoas</h2>
       {!prontoPraEnviar &&
         <>
-          <p className={dica.className}>{dica.texto}</p>
+          <h2 className={dica.className}>{dica.texto}</h2>
         </>
       }
       <div id='container'>
-        <label className='labelWhats'>WhatsApp:
+        <label className='labelWhats'><h3>WhatsApp:</h3>
           <input type="text" inputMode="numeric" maxLength={11} placeholder='DDD/Número' className='inputWhats' onChange={handleWhatsChange} />
         </label>
         <div style={{ marginTop: '2vh', fontSize: "3vh" }}>

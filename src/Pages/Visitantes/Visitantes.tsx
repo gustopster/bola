@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "./Visitantes.css";
 interface Visitante {
   nome: string;
   whatsApp: string;
@@ -46,7 +45,7 @@ function Visitantes() {
   return (
     <>
       <div className='formContainer'>
-        <p>Visitantes Registrados Hoje: {visitantes.length > 0 ? visitantes.length : 0}</p>
+        <h1>Visitantes Registrados Hoje: {visitantes.length > 0 ? visitantes.length : 0}</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="nome">Nome:</label>
           <input

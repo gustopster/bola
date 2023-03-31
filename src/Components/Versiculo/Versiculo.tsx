@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import bibliaLivreData from "./biblialivre.json";
-import "./Versiculo.css";
 
 interface BibliaLivre {
   id?: string;

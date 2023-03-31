@@ -11,7 +11,6 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import VisitorsIcon from '@mui/icons-material/Group';
-import "./index.css"
 type Anchor = 'left';
 export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: string) => void }) {
   const handleTextMenu = (textoDoMenu: string) => {
