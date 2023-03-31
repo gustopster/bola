@@ -1,47 +1,25 @@
-#container {
-    width: 100%;
-  }
-  .totalPessoas{
-    margin-top: 12.5vh;
-    font-size: 4vh;
-  }
-  .labelResposta {
-    font-size: 1rem;
-    margin-top: 50px;
-    color: green;
-  }
-  #enviado {
-    display: none;
-  }
-  
-  .labelWhats {
-    font-size: 1rem;
-  }
-  .inputWhats {
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-    width: 25vh;
-    padding: 1px;
-    font-size: 18px;
-    border-width: 4px;
-    border-color: #CCCCCC;
-    background-color: #FFFFFF;
-    color: #000000;
-    border-style: solid;
-    border-radius: 9px;
-  }
-  
-  .aviso {
-    text-decoration: underline;
-    color: orange;
-    font-size: 1rem;
-    margin-top: 12.5vh;
-  }
-  
-  .avisoErro {
-    text-decoration: underline;
-    color: red;
-    margin-top: 12.5vh;
-    font-size: 1rem;
-  }
+.formContainer {
+  font-size: 21px;
+  align-items: center;
+  margin-top: 10%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+}
+.formContainer input {
+  width: 75%;
+  border-radius: 7px;
+  height: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.formContainer label, button {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  display: flex;
+}
+.botaoAdicionar{
+  margin-top: 20px;
+}
