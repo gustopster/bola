@@ -1,25 +1,24 @@
 .formContainer {
+  margin-top: 6%;
+  margin-left: 2.5%;
   font-size: 21px;
-  align-items: center;
-  margin-top: 10%;
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 99%;
+  width: 90%;
 }
 .formContainer input {
-  width: 75%;
-  border-radius: 7px;
-  height: 20px;
+  width: 100%;
+  border-radius: 3px;
   margin-right: 5px;
   margin-left: 5px;
 }
 
-.formContainer label, button {
+.formContainer label, button, p {
+  margin-left: 7%;
   margin-bottom: 5px;
   margin-top: 5px;
-  display: flex;
 }
 .botaoAdicionar{
-  margin-top: 20px;
+  margin-top: 10px;
 }
