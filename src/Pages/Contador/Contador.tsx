@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/Firebase/firebaseServer';
+interface FirestoreData {
+  contagemPessoas: {resultado:number};
+  contagemObreiros: {resultado:number};
+}
 const Contador = () => {
   const [contagem, setContagem] = useState<number>(0);
   const [obreiros, setObreiros] = useState<number>(0);
@@ -8,22 +12,21 @@ const Contador = () => {
   useEffect(() => {
     async function getConfig() {
       const snapshot = await getDoc(dadosFirebase);
-      const data = snapshot.data();
-      const contagem = data?.contagem ?? 0;
-      const obreiros = data?.obreiros ?? 0;
-      setContagem(contagem);
-      setPessoas(contagem);
-      setObreiros(obreiros);
+      const data = snapshot.data() as FirestoreData | undefined;;
+      if (data) {
+        setContagem(data.contagemPessoas.resultado);
+        setObreiros(data.contagemObreiros.resultado);
+      }
     }
     getConfig();
   }, [dadosFirebase]);
-  const [enviadoComSucesso, setEnviadoComSucesso] = useState<string>('');
   const [prontoPraEnviar, setProntoPraEnviar] = useState<boolean>(false);
   const enviarContagem = () => {
-    const novosDados = { contagem: pessoas +1 };
+    const novosDados = {contagemPessoas: {resultado: pessoas}};
     if (!prontoPraEnviar) {
       return;
     } else {
+
       updateDoc(dadosFirebase, novosDados)
         .then(() => {
           setTimeout(() => {
@@ -42,12 +45,12 @@ const Contador = () => {
     return (
       <>
         <div className='contadorDiv'>
-          <h1 className='totalPessoas'>Total: {obreiros+pessoas}</h1>
+          <h1 className='totalPessoas'>Total: {obreiros + pessoas}</h1>
           <h3> {obreiros} Obreiros na Igreja</h3>
           <h2> {contagem > pessoas ? contagem : pessoas} Pessoas na Igreja</h2>
           <div>
           </div>
-          <button id={`${enviadoComSucesso}`} className='botaoContar' onClick={() => {
+          <button className='botaoContar' onClick={() => {
             setPessoas(pessoas + 1);
             setProntoPraEnviar(true);
             enviarContagem();
