@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { getDoc, updateDoc } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/Firebase/Data/firebaseServer';
 import { FirestoreData } from '../../types/FirestoreData';
-
 const Contador = () => {
   const [obreiros, setObreiros] = useState<number>(0);
   const [pessoas, setPessoas] = useState<number>(0);
@@ -20,12 +19,7 @@ const Contador = () => {
   const enviarContagem = () => {
     const novosDados = { contagemPessoas: { resultado: pessoas + 1 } };
     updateDoc(dadosFirebase, novosDados)
-      .then(() => {
-        /* console.log("adicionado") */
-      })
-      .catch((error) => {
-        console.error('Erro ao atualizar o documento:', error);
-      });
+      .then(() => { }).catch((error) => { console.error('Erro ao atualizar o documento:', error); });
   }
   if (pessoas === null) {
     return (
