@@ -19,7 +19,7 @@ const Contador = () => {
   const enviarContagem = () => {
     const novosDados = { contagemPessoas: { resultado: pessoas + 1 } };
     updateDoc(dadosFirebase, novosDados)
-      .then(() => { }).catch((error) => { console.error('Erro ao atualizar o documento:', error); });
+      .then(() => {}).catch((error) => { console.error('Erro ao atualizar o documento:', error); });
   }
   if (pessoas === null) {
     return (
