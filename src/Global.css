@@ -1,4 +1,4 @@
-:root{
+:root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     box-sizing: border-box;
     padding: 0;
@@ -10,7 +10,7 @@
     background-position: center;
     text-align: center;
 }
-.menuHamburgerBotao{
+.menuHamburgerBotao {
     position: absolute !important;
     background-color: white !important;
     color: black !important;
@@ -19,28 +19,28 @@
     margin-left: 1% !important;
     margin-top: 1% !important;
 }
-.versiculoDiv{
+.versiculoDiv {
     display: inline-flexbox;
     position: absolute;
     padding: 0.5%;
     margin-top: 25vh;
     width: 95%;
 }
-.contadorDiv{
+.contadorDiv {
     display: inline-flexbox;
     position: absolute;
     padding: 0.5%;
     margin-top: 25vh;
     width: 95%;
 }
-.visitantesDiv{
+.visitantesDiv {
     display: inline-flexbox;
     position: absolute;
     padding: 0.5%;
-    margin-top: 25vh;
+    margin-top: 5vh;
     width: 95%;
 }
-.totalPessoas{
+.totalPessoas {
     font-size: 2.5rem;
 }
 .botaoContar {
@@ -53,14 +53,12 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-  }
-  
-  .botaoContar:hover {
+}
+.botaoContar:hover {
     background-color: #29AB87;
     color: #ffffff;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
-  }
-  
+}
 .botaoEnviar {
     margin-top: 10vh;
     background-color: #ffffff;
@@ -71,14 +69,70 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-  }
-  
-  .botaoEnviar:hover {
+}
+.botaoEnviar:hover {
     background-color: #29AB87;
     color: #ffffff;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
-  }
-  .avisoSucesso{
+}
+.avisoSucesso {
     font-size: 1.5rem;
     color: #29AB87;
-  }
+}
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.form-control label {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.form-control input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+}
+.botaoAdicionar {
+  background-color: #3cba54;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+.botaoAdicionar:hover {
+    background-color: #16a085;
+}
+
+.botaoEnviarForm {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}

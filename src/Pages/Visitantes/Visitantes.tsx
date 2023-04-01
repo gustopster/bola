@@ -46,59 +46,29 @@ function Visitantes() {
     <>
       <div className='visitantesDiv'>
         <h1>Visitantes Registrados: {visitantes.length > 0 ? visitantes.length : 0}</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} className="formulario">
+          <div className="form-control">
             <label htmlFor="nome">Nome:</label>
-            <input
-              type="text"
-              id="nome"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              required
-            />
+            <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
           </div>
-          <div>
+          <div className="form-control">
             <label htmlFor="whatsapp">Whats:</label>
-            <input
-              type="text"
-              id="whatsapp"
-              value={whatsApp}
-              onChange={(e) => setWhatsApp(e.target.value)}
-              required
-            />
+            <input type="text" id="whatsapp" value={whatsApp} onChange={(e) => setWhatsApp(e.target.value)} required />
           </div>
-          <div>
+          <div className="form-control">
             <label htmlFor="email">E-mail:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
-          <div>
+          <div className="form-control">
             <label htmlFor="celula">Célula:</label>
-            <input
-              type="text"
-              id="celula"
-              value={celulaSugerida}
-              onChange={(e) => setCelulaSugerida(e.target.value)}
-              required
-            />
+            <input type="text" id="celula" value={celulaSugerida} onChange={(e) => setCelulaSugerida(e.target.value)} required />
           </div>
-          <div>
+          <div className="form-control">
             <label htmlFor="bairro">Bairro:</label>
-            <input
-              type="text"
-              id="bairro"
-              value={bairro}
-              onChange={(e) => setBairro(e.target.value)}
-              required
-            />
+            <input type="text" id="bairro" value={bairro} onChange={(e) => setBairro(e.target.value)} required />
           </div>
-          <button className='botaoAdicionar' type="submit">Adicionar visitante</button>
-          <button onClick={handleEnviar}>Enviar lista para o WhatsApp</button>
+          <button className="botaoAdicionar" type="submit">Adicionar visitante</button>
+          <button onClick={handleEnviar} className="botaoEnviarForm">Enviar lista para o WhatsApp</button>
         </form>
       </div>
     </>
