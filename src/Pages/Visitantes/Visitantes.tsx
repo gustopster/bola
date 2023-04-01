@@ -5,6 +5,7 @@ interface Visitante {
   email: string;
   celulaSugerida: string;
   bairro: string;
+  pergunta: string;
 }
 function Visitantes() {
   const [nome, setNome] = useState('');
@@ -12,9 +13,10 @@ function Visitantes() {
   const [email, setEmail] = useState('');
   const [celulaSugerida, setCelulaSugerida] = useState('');
   const [bairro, setBairro] = useState('');
+  const [pergunta, setPergunta] = useState('');
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const visitante: Visitante = { nome, whatsApp, email, celulaSugerida, bairro };
+    const visitante: Visitante = { nome, whatsApp, email, celulaSugerida, bairro, pergunta };
     const visitantes: Visitante[] = JSON.parse(localStorage.getItem('visitantes')!) || [];
     visitantes.push(visitante);
     localStorage.setItem('visitantes', JSON.stringify(visitantes));
@@ -23,6 +25,7 @@ function Visitantes() {
     setEmail('');
     setCelulaSugerida('');
     setBairro('');
+    setPergunta('');
   };
   const handleEnviar = () => {
     const visitantes: Visitante[] = JSON.parse(localStorage.getItem('visitantes')!) || [];
@@ -56,19 +59,23 @@ function Visitantes() {
             <input type="text" id="whatsapp" value={whatsApp} onChange={(e) => setWhatsApp(e.target.value)} required />
           </div>
           <div className="form-control">
-            <label htmlFor="email">E-mail:</label>
+            <label htmlFor="email" >E-Mail:</label>
             <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
           <div className="form-control">
-            <label htmlFor="celula">Célula:</label>
+            <label htmlFor="celula" >Célula Sugerida:</label>
             <input type="text" id="celula" value={celulaSugerida} onChange={(e) => setCelulaSugerida(e.target.value)} required />
           </div>
           <div className="form-control">
             <label htmlFor="bairro">Bairro:</label>
             <input type="text" id="bairro" value={bairro} onChange={(e) => setBairro(e.target.value)} required />
           </div>
+          <div className="form-control">
+            <label htmlFor="pergunta" >Como conheceu a igreja?</label>
+            <input type="text" id="pergunta" value={pergunta} onChange={(e) => setBairro(e.target.value)} required />
+          </div>
           <button className="botaoAdicionar" type="submit">Adicionar visitante</button>
-          <button onClick={handleEnviar} className="botaoEnviarForm">Enviar lista para o WhatsApp</button>
+          <button onClick={handleEnviar} className="botaoEnviarForm">Enviar para o WhatsApp</button>
         </form>
       </div>
     </>
