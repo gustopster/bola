@@ -16,6 +16,21 @@ function Visitantes() {
   const [pergunta, setPergunta] = useState('');
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Verificar se o email é válido
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert('Por favor, insira um email válido.');
+      return;
+    }
+
+    // Verificar se o número de celular é válido
+    const celularRegex = /^\d{2}\d{5}\d{4}$/;
+    if (!celularRegex.test(whatsApp)) {
+      alert('Por favor, insira um número de celular válido (incluindo o DDD e os 9 dígitos).');
+      return;
+    }
+
     const visitante: Visitante = { nome, whatsApp, email, celulaSugerida, bairro, pergunta };
     const visitantes: Visitante[] = JSON.parse(localStorage.getItem('visitantes')!) || [];
     visitantes.push(visitante);
@@ -35,14 +50,26 @@ function Visitantes() {
     }
     if (window.confirm('Após enviar a lista para o WhatsApp, os dados serão excluídos. Deseja mesmo continuar?')) {
       const mensagem = visitantes
-        .map((visitante, index) => `${index + 1}. ${visitante.nome} - ${visitante.whatsApp} - ${visitante.email} - ${visitante.bairro} - ${visitante.celulaSugerida}`)
+        .map((visitante, index) => `${index + 1}. ${visitante.nome} - ${visitante.whatsApp} - ${visitante.email} - ${visitante.bairro} - ${visitante.celulaSugerida} - ${visitante.pergunta}`)
         .join('                                                                                                                                                   ');
 
       const url = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
       window.open(url);
       localStorage.removeItem('visitantes');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     }
   };
+
+  const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+    const regex = /^[0-9]*$/;
+
+    if (!regex.test(input.value)) {
+      input.value = input.value.replace(/[^0-9]/g, '');
+    }
+  }
 
   const visitantes = JSON.parse(localStorage.getItem('visitantes') || '[]');
   return (
@@ -56,7 +83,7 @@ function Visitantes() {
           </div>
           <div className="form-control">
             <label htmlFor="whatsapp">Whats:</label>
-            <input type="text" id="whatsapp" value={whatsApp} onChange={(e) => setWhatsApp(e.target.value)} required />
+            <input type="text" onInput={handleInput} value={whatsApp} inputMode="numeric" maxLength={11} onChange={(e) => setWhatsApp(e.target.value)} />
           </div>
           <div className="form-control">
             <label htmlFor="email" >E-Mail:</label>
@@ -72,7 +99,7 @@ function Visitantes() {
           </div>
           <div className="form-control">
             <label htmlFor="pergunta" >Como conheceu a igreja?</label>
-            <input type="text" id="pergunta" value={pergunta} onChange={(e) => setBairro(e.target.value)} required />
+            <input type="text" id="pergunta" value={pergunta} onChange={(e) => setPergunta(e.target.value)} required />
           </div>
           <button className="botaoAdicionar" type="submit">Adicionar visitante</button>
           <button onClick={handleEnviar} className="botaoEnviarForm">Enviar para o WhatsApp</button>

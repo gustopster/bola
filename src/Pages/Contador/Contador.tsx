@@ -12,7 +12,7 @@ function Contador() {
 
     setEnviadoComSucesso('enviado');
     setTimeout(() => {
-      window.open(`https://wa.me/5515996881593?text=Contagem%20de%20pessoas:%20${pessoas}`);
+      window.open(`https://wa.me/?text=${encodeURIComponent(pessoas)}`);
       setTimeout(() => {
         window.location.reload();
       }, 500);
