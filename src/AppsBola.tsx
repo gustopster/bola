@@ -6,7 +6,7 @@ import Home from "./Pages/Home/Home";
 import Visitantes from "./Pages/Visitantes/Visitantes";
 
 export default function AppsBola() {
-  const [textoDoMenu, setTextoDoMenu] = useState("");
+  const [textoDoMenu, setTextoDoMenu] = useState<string>("");
 
   return (
     <>

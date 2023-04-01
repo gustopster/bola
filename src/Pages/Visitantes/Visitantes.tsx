@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-interface Visitante {
-  nome: string;
-  whatsApp: string;
-  email: string;
-  celulaSugerida: string;
-  bairro: string;
-  pergunta: string;
-}
+import { Visitante } from '../../types/Visitantes';
+
 function Visitantes() {
   const [nome, setNome] = useState('');
   const [whatsApp, setWhatsApp] = useState('');
