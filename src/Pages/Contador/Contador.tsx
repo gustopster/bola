@@ -9,10 +9,10 @@ function Contador() {
     if (!prontoPraEnviar) {
       return;
     }
-
+    const formatarTexto = `Possui ${pessoas} no culto de hoje`
     setEnviadoComSucesso('enviado');
     setTimeout(() => {
-      window.open(`https://wa.me/?text=${encodeURIComponent(pessoas)}`);
+      window.open(`https://wa.me/?text=${encodeURIComponent(formatarTexto)}`);
       setTimeout(() => {
         window.location.reload();
       }, 500);
