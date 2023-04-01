@@ -20,7 +20,7 @@ const Contador = () => {
   }, [dadosFirebase]);
   const [prontoPraEnviar, setProntoPraEnviar] = useState<boolean>(false);
   const enviarContagem = () => {
-    const novosDados = {contagemPessoas: {resultado: pessoas}};
+    const novosDados = {contagemPessoas: {resultado: pessoas+1}};
     if (!prontoPraEnviar) {
       return;
     } else {
