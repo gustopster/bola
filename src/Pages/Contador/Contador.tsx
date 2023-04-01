@@ -9,7 +9,7 @@ function Contador() {
     if (!prontoPraEnviar) {
       return;
     }
-    const formatarTexto = `Possui ${pessoas} no culto de hoje`
+    const formatarTexto = `Possui ${pessoas} pessoas no culto de hoje`
     setEnviadoComSucesso('enviado');
     setTimeout(() => {
       window.open(`https://wa.me/?text=${encodeURIComponent(formatarTexto)}`);
