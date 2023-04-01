@@ -1,48 +1,62 @@
-import React, { CSSProperties, useState } from 'react';
-
-function Contador() {
-  const [pessoas, setPessoas] = useState(0);
-  const [enviadoComSucesso, setEnviadoComSucesso] = useState('');
-  const [prontoPraEnviar, setProntoPraEnviar] = useState(false);
-
+import { useEffect, useState } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { dadosFirebase } from '../../services/Firebase/firebaseServer';
+const Contador = () => {
+  const [contagem, setContagem] = useState<number>(0);
+  const [obreiros, setObreiros] = useState<number>(0);
+  const [pessoas, setPessoas] = useState<number>(0);
+  useEffect(() => {
+    async function getConfig() {
+      const snapshot = await getDoc(dadosFirebase);
+      const data = snapshot.data();
+      const contagem = data?.contagem ?? 0;
+      const obreiros = data?.obreiros ?? 0;
+      setContagem(contagem);
+      setPessoas(contagem);
+      setObreiros(obreiros);
+    }
+    getConfig();
+  }, [dadosFirebase]);
+  const [enviadoComSucesso, setEnviadoComSucesso] = useState<string>('');
+  const [prontoPraEnviar, setProntoPraEnviar] = useState<boolean>(false);
   const enviarContagem = () => {
+    const novosDados = { contagem: pessoas +1 };
     if (!prontoPraEnviar) {
       return;
+    } else {
+      updateDoc(dadosFirebase, novosDados)
+        .then(() => {
+          setTimeout(() => {
+          }, 500);
+        })
+        .catch((error) => {
+          console.error('Erro ao atualizar o documento:', error);
+        });
     }
-    const formatarTexto = `Possui ${pessoas} pessoas no culto de hoje`
-    setEnviadoComSucesso('enviado');
-    setTimeout(() => {
-      window.open(`https://wa.me/?text=${encodeURIComponent(formatarTexto)}`);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
-    }, 3000);
-  };
-  return (
-    <>
-      <div className='contadorDiv'>
-        <h1>Contador</h1>
-        <h2 className='totalPessoas'> {pessoas} Pessoas</h2>
-        <div>
+  }
+  if (contagem === null) {
+    return (
+      <div>Carregando...</div>
+    )
+  } else {
+    return (
+      <>
+        <div className='contadorDiv'>
+          <h1 className='totalPessoas'>Total: {obreiros+pessoas}</h1>
+          <h3> {obreiros} Obreiros na Igreja</h3>
+          <h2> {contagem > pessoas ? contagem : pessoas} Pessoas na Igreja</h2>
+          <div>
+          </div>
           <button id={`${enviadoComSucesso}`} className='botaoContar' onClick={() => {
             setPessoas(pessoas + 1);
             setProntoPraEnviar(true);
+            enviarContagem();
           }}>
             Click para contar
           </button>
         </div>
-        {enviadoComSucesso ? (
-          <p className='avisoSucesso'>Contagem enviada com sucesso!</p>
-        ) : (
-          <div>
-            <button className='botaoEnviar' onClick={enviarContagem} disabled={!prontoPraEnviar}>
-              Enviar Total
-            </button>
-          </div>
-        )}
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
-
 export default Contador;

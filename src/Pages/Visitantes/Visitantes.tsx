@@ -101,7 +101,7 @@ function Visitantes() {
             <label htmlFor="pergunta" >Como conheceu a igreja?</label>
             <input type="text" id="pergunta" value={pergunta} onChange={(e) => setPergunta(e.target.value)} required />
           </div>
-          <button className="botaoAdicionar" type="submit">Adicionar visitante</button>
+          <button className="botaoAdicionarForm" type="submit">Adicionar visitante</button>
           <button onClick={handleEnviar} className="botaoEnviarForm">Enviar para o WhatsApp</button>
         </form>
       </div>
