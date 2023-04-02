@@ -156,26 +156,27 @@
     font-size: 1.2rem;
     font-weight: 400;
     color: #fff;
-    background-color: #333;
+    
+    background-color: #1a1a1ac7;
 }
 
 .tabelaDiv thead {
-    background-color: #222;
+    background-color: rgba(34, 34, 34, 0.797);
 }
 
 .tabelaDiv th,
 .tabelaDiv td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid rgba(68, 68, 68, 0.836);
 }
 
 .tabelaDiv tbody tr:nth-of-type(even) {
-    background-color: #444;
+    background-color: rgba(68, 68, 68, 0.804);
 }
 
 .tabelaDiv tbody tr:hover {
-    background-color: #555;
+    background-color: rgba(85, 85, 85, 0.779);
 }
 
 .linkTabela {
@@ -191,6 +192,30 @@
 .linkTabela:hover {
     padding: 9px;
     border-radius: 7px;
-    background-color:  #333333;
+    background-color: #333333;
     color: #25D366;
+}
+
+input[type="date"] {
+    background-color: #1a1a1ac7;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.15rem #fff inset;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+.tabelaVisitantesLabel{
+    font-size: 1.5rem;
+}
+.divVisitantesTable{
+    margin-top: 7vh;
 }
