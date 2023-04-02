@@ -1,4 +1,5 @@
 export type TabelaFormulario = {
+    perguntaCulto: string;
     id: string;
     nome: string;
     email: string;

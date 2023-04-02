@@ -6,6 +6,7 @@ function Visitantes() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [pergunta, setPergunta] = useState('');
+  const [perguntaCulto, setPerguntaCulto] = useState('');
   const [whatsApp, setWhatsApp] = useState('');
   const [celulaSugerida, setCelulaSugerida] = useState('');
   const [bairro, setBairro] = useState('');
@@ -33,6 +34,7 @@ function Visitantes() {
       celulaSugerida,
       bairro,
       createdAt: serverTimestamp(),
+      perguntaCulto,
     };
     try {
       const docRef = await addDoc(collection(dadosFirebase, 'formularios'), formulario);
@@ -40,6 +42,7 @@ function Visitantes() {
       setNome('');
       setEmail('');
       setPergunta('');
+      setPerguntaCulto('');
       setWhatsApp('');
       setCelulaSugerida('');
       setBairro('');
@@ -83,6 +86,10 @@ function Visitantes() {
           <div className="form-control">
             <label htmlFor="pergunta" >Como conheceu a igreja?</label>
             <input type="text" id="pergunta" value={pergunta} onChange={(e) => setPergunta(e.target.value)} required />
+          </div>
+          <div className="form-control">
+            <label htmlFor="perguntaCulto" >Qual Culto?</label>
+            <input type="text" id="perguntaCulto" value={perguntaCulto} onChange={(e) => setPerguntaCulto(e.target.value)} required />
           </div>
           <button onClick={handleSubmit} className="botaoEnviarForm">Salvar Visitante</button>
         </form>

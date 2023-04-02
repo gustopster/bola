@@ -42,6 +42,7 @@ function TabelaFormularios() {
             <th>Email</th>
             <th>WhatsApp</th>
             <th>Bairro</th>
+            <th>Culto</th>
             <th>Como Conheceu o Bola?</th>
           </tr>
         </thead>
@@ -60,6 +61,7 @@ function TabelaFormularios() {
                 </a>
               </td>
               <td>{formulario.bairro}</td>
+              <td>{formulario.perguntaCulto}</td>
               <td>{formulario.pergunta}</td>
             </tr>
           ))}
