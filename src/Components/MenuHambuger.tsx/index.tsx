@@ -11,7 +11,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import HomeIcon from '@mui/icons-material/Home';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import VisitorsIcon from '@mui/icons-material/Group';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
 type Anchor = 'left';
 export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: string) => void }) {
@@ -40,11 +40,11 @@ export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: stri
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Contador", "Visitantes", "Tabela"].map((text, index) => (
+        {["Home", "Obreiros", "Contador", "Visitantes", "Tabela"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleTextMenu(text)}>
               <ListItemIcon>
-                {index === 0 ? <HomeIcon /> : index === 1 ? <CalculateIcon /> : index === 2 ? <VisitorsIcon /> : index === 3 ? <BackupTableIcon /> : null}
+                {index === 0 ? <HomeIcon /> : index === 1 ? <EngineeringIcon />: index === 2 ? <CalculateIcon /> : index === 3 ? <VisitorsIcon /> : index === 4 ? <BackupTableIcon /> : null}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
