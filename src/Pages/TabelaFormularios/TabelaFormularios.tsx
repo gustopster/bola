@@ -40,6 +40,7 @@ function TabelaFormularios() {
                 href={`https://api.whatsapp.com/send?phone=${formulario.whatsApp}&text=Olá%20Somos%20do%20Bola%20de%20Neve%20Sorocaba,%20estamos%20entrando%20em%20contato%20pois%20você%20nos%20deu%20o%20seu%20contato.`}
                 target="_blank"
                 rel="noopener noreferrer"
+                className='linkTabela'
               >
                 {formulario.whatsApp}
               </a>

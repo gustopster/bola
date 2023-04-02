@@ -177,3 +177,17 @@
 .tabelaDiv tbody tr:hover {
     background-color: #555;
 }
+
+.linkTabela {
+    font-size: 1.3rem;
+    color: white;
+    text-decoration: none;
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+.linkTabela:hover {
+    border-radius: 7px;
+    padding: 0.5px;
+    background-color:  white;
+    color: black;
+}
