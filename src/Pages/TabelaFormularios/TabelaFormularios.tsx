@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/firebaseServer';
 import { TabelaFormulario } from '../../types/TabelaFormulario';
-import { Timestamp } from 'firebase/firestore';
+
 function TabelaFormularios() {
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
 
   useEffect(() => {
     const fetchFormularios = async () => {
-      const querySnapshot = await getDocs(collection(dadosFirebase, 'formularios'));
+      const q = query(collection(dadosFirebase, 'formularios'), orderBy('createdAt', 'desc'));
+      const querySnapshot = await getDocs(q);
       const dados: TabelaFormulario[] = [];
       querySnapshot.forEach((doc) => {
         dados.push({ id: doc.id, ...doc.data() } as TabelaFormulario);
@@ -17,6 +18,7 @@ function TabelaFormularios() {
     };
     fetchFormularios();
   }, []);
+
   return (
     <table className='tabelaDiv'>
       <thead>

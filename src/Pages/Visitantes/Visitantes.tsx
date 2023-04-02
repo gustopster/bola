@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/firebaseServer';
 
 function Visitantes() {
@@ -32,6 +32,7 @@ function Visitantes() {
       whatsApp,
       celulaSugerida,
       bairro,
+      createdAt: serverTimestamp(),
     };
     try {
       const docRef = await addDoc(collection(dadosFirebase, 'formularios'), formulario);
