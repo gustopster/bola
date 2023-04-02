@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/firebaseServer';
 import { TabelaFormulario } from '../../types/TabelaFormulario';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 function TabelaFormularios() {
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
@@ -41,8 +42,7 @@ function TabelaFormularios() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className='linkTabela'
-              >
-                {formulario.whatsApp}
+              >{formulario.whatsApp}<WhatsAppIcon sx={{marginLeft:'10px'}} fontSize='medium' />
               </a>
             </td>
             <td>{formulario.bairro}</td>

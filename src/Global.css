@@ -179,15 +179,18 @@
 }
 
 .linkTabela {
-    font-size: 1.3rem;
+    font-size: 1.2rem !important;
+    padding: 10px;
+    display: flex;
+    font-size: 65%;
     color: white;
     text-decoration: none;
     transition: border-bottom 0.3s ease-in-out;
 }
 
 .linkTabela:hover {
+    padding: 9px;
     border-radius: 7px;
-    padding: 0.5px;
-    background-color:  white;
-    color: black;
+    background-color:  #333333;
+    color: #25D366;
 }
