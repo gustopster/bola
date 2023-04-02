@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getDoc, updateDoc } from 'firebase/firestore';
-import { dadosFirebase } from '../../services/Firebase/Data/firebaseServer';
+import { dadosFirebase } from '../../services/firebaseServer';
 import { FirestoreData } from '../../types/FirestoreData';
 const Contador = () => {
   const [obreiros, setObreiros] = useState<number>(0);
