@@ -27,7 +27,7 @@ function TabelaFormularios() {
           <th>Email</th>
           <th>WhatsApp</th>
           <th>Bairro</th>
-          <th>Email</th>
+          <th>Como Conheceu o Bola?</th>
         </tr>
       </thead>
       <tbody>
