@@ -148,3 +148,32 @@
     width: 100%;
     padding: 18px;
 }
+
+.tabelaDiv {
+    position: absolute;
+    margin-top: 10vh;
+    width: 98%;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #fff;
+    background-color: #333;
+}
+
+.tabelaDiv thead {
+    background-color: #222;
+}
+
+.tabelaDiv th,
+.tabelaDiv td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.tabelaDiv tbody tr:nth-of-type(even) {
+    background-color: #444;
+}
+
+.tabelaDiv tbody tr:hover {
+    background-color: #555;
+}

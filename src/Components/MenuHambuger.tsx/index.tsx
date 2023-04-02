@@ -40,11 +40,11 @@ export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: stri
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Contador", "Visitantes","Formulario","Tabela"].map((text, index) => (
+        {["Home", "Contador", "Visitantes", "Tabela"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleTextMenu(text)}>
               <ListItemIcon>
-                {index === 0 ? <HomeIcon /> : index === 1 ? <CalculateIcon /> : index === 2 ? <VisitorsIcon /> : index === 3 ? <LibraryBooksIcon /> : index === 4 ? <BackupTableIcon /> : null}
+                {index === 0 ? <HomeIcon /> : index === 1 ? <CalculateIcon /> : index === 2 ? <VisitorsIcon /> : index === 3 ? <BackupTableIcon /> : null}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>

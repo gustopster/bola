@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Visitante } from '../../types/Visitantes';
+import { useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { dadosFirebase } from '../../services/firebaseServer';
 
 function Visitantes() {
   const [nome, setNome] = useState('');
-  const [whatsApp, setWhatsApp] = useState('');
   const [email, setEmail] = useState('');
+  const [pergunta, setPergunta] = useState('');
+  const [whatsApp, setWhatsApp] = useState('');
   const [celulaSugerida, setCelulaSugerida] = useState('');
   const [bairro, setBairro] = useState('');
-  const [pergunta, setPergunta] = useState('');
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
     // Verificar se o email é válido
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
@@ -24,38 +25,27 @@ function Visitantes() {
       alert('Por favor, insira um número de celular válido (incluindo o DDD e os 9 dígitos).');
       return;
     }
-
-    const visitante: Visitante = { nome, whatsApp, email, celulaSugerida, bairro, pergunta };
-    const visitantes: Visitante[] = JSON.parse(localStorage.getItem('visitantes')!) || [];
-    visitantes.push(visitante);
-    localStorage.setItem('visitantes', JSON.stringify(visitantes));
-    setNome('');
-    setWhatsApp('');
-    setEmail('');
-    setCelulaSugerida('');
-    setBairro('');
-    setPergunta('');
-  };
-  const handleEnviar = () => {
-    const visitantes: Visitante[] = JSON.parse(localStorage.getItem('visitantes')!) || [];
-    if (visitantes.length === 0) {
-      alert('Não há visitantes para enviar!');
-      return;
-    }
-    if (window.confirm('Após enviar a lista para o WhatsApp, os dados serão excluídos. Deseja mesmo continuar?')) {
-      const mensagem = visitantes
-        .map((visitante, index) => `${index + 1}. ${visitante.nome} - ${visitante.whatsApp} - ${visitante.email} - ${visitante.bairro} - ${visitante.celulaSugerida} - ${visitante.pergunta}`)
-        .join('                                                                                                                                                   ');
-
-      const url = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
-      window.open(url);
-      localStorage.removeItem('visitantes');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+    const formulario = {
+      nome,
+      email,
+      pergunta,
+      whatsApp,
+      celulaSugerida,
+      bairro,
+    };
+    try {
+      const docRef = await addDoc(collection(dadosFirebase, 'formularios'), formulario);
+      console.log('Documento criado com ID: ', docRef.id);
+      setNome('');
+      setEmail('');
+      setPergunta('');
+      setWhatsApp('');
+      setCelulaSugerida('');
+      setBairro('');
+    } catch (error) {
+      console.error('Erro ao adicionar documento: ', error);
     }
   };
-
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
     const input = event.currentTarget;
     const regex = /^[0-9]*$/;
@@ -64,12 +54,10 @@ function Visitantes() {
       input.value = input.value.replace(/[^0-9]/g, '');
     }
   }
-
-  const visitantes = JSON.parse(localStorage.getItem('visitantes') || '[]');
   return (
     <>
       <div className='visitantesDiv'>
-        <h1>Visitantes Registrados: {visitantes.length > 0 ? visitantes.length : 0}</h1>
+        <h1>Visitantes Registrados:</h1>
         <form onSubmit={handleSubmit} className="formulario">
           <div className="form-control">
             <label htmlFor="nome">Nome:</label>
@@ -95,11 +83,11 @@ function Visitantes() {
             <label htmlFor="pergunta" >Como conheceu a igreja?</label>
             <input type="text" id="pergunta" value={pergunta} onChange={(e) => setPergunta(e.target.value)} required />
           </div>
-          <button className="botaoAdicionarForm" type="submit">Adicionar visitante</button>
-          <button onClick={handleEnviar} className="botaoEnviarForm">Enviar para o WhatsApp</button>
+          <button onClick={handleSubmit} className="botaoEnviarForm">Salvar Visitante</button>
         </form>
       </div>
     </>
   );
 }
+
 export default Visitantes;

@@ -2,5 +2,7 @@ export type TabelaFormulario = {
     id: string;
     nome: string;
     email: string;
-    mensagem: string;
+    pergunta: string;
+    bairro: string;
+    whatsApp: string;
   };
