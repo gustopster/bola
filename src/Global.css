@@ -11,6 +11,13 @@
     text-align: center;
 }
 
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-clear-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 .menuHamburgerBotao {
     position: absolute !important;
     background-color: white !important;
@@ -49,7 +56,7 @@
     font-size: 2.5rem;
 }
 
-.botaoContar {
+.botaoSalvarObreiros {
     margin-top: 10vh;
     background-color: #ffffff;
     color: #333333;
@@ -156,7 +163,7 @@
     font-size: 1.2rem;
     font-weight: 400;
     color: #fff;
-    
+
     background-color: #1a1a1ac7;
 }
 
@@ -213,9 +220,47 @@ input[type="date"] {
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
-.tabelaVisitantesLabel{
+
+.tabelaVisitantesLabel {
     font-size: 1.5rem;
 }
-.divVisitantesTable{
+
+.divVisitantesTable {
     margin-top: 7vh;
+}
+
+.obreirosDiv {
+    margin-top: 10vh;
+}
+
+.inputObreiros {
+    width: 140px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: 5px;
+    align-items: center;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 4px;
+    color: black;
+    background-color: white;
+}
+
+.botaoSalvarObreiros {
+    margin-top: 10vh;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.botaoSalvarObreiros:hover {
+    background-color: #29AB87;
+    color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
 }

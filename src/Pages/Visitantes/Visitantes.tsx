@@ -14,11 +14,11 @@ function Visitantes() {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     // Verificar se o email é válido
-    const emailRegex = /\S+@\S+\.\S+/;
+    /* const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
       alert('Por favor, insira um email válido.');
       return;
-    }
+    } */
 
     // Verificar se o número de celular é válido
     const celularRegex = /^\d{2}\d{5}\d{4}$/;

@@ -5,7 +5,6 @@ import { ContagemPessoas } from '../../types/ContagemPessoas';
 import { contagemObreiros } from '../../types/ContagemObreiros';
 
 const Contador = () => {
-  const [obreiros, setObreiros] = useState<number>(0);
   const [pessoas, setPessoas] = useState<number>(0);
 
   useEffect(() => {
@@ -16,11 +15,10 @@ const Contador = () => {
       const dataPessoas = snapshotPessoas.data() as ContagemPessoas | undefined;;
       if (dataPessoas && dataObreiros) {
         setPessoas(dataPessoas.resultado);
-        setObreiros(dataObreiros.resultado);
       }
     }
     getConfig()
-  }, [obreiros, pessoas]);
+  }, [pessoas]);
 
   const enviarContagem = () => {
     const novosDados = { resultado: pessoas + 1 };
@@ -35,7 +33,7 @@ const Contador = () => {
     const confirmacao = window.confirm('Tem certeza que deseja resetar o número de pessoas?');
     if (confirmacao) {
       // salvar os dados antes de resetar
-      const dadosAntesDoReset = { resultado: pessoas + obreiros};
+      const dadosAntesDoReset = { resultado: pessoas};
       await addDoc(collection(dadosFirebase, "dadosAntesDoReset"), dadosAntesDoReset);
 
       // resetar o número de pessoas
@@ -52,8 +50,8 @@ const Contador = () => {
   return (
     <>
       <div className='contadorDiv'>
-        <h1 className='totalPessoas'>Total: {obreiros + pessoas}</h1>
-        <h3> {obreiros} Obreiros na Igreja</h3>
+        <h1 className='totalPessoas'>Total: {pessoas}</h1>
+        <h3> {} Obreiros na Igreja</h3>
         <h2> {pessoas} Pessoas na Igreja</h2>
         <div>
           <button className='botaoContar' onClick={() => {
