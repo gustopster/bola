@@ -13,7 +13,7 @@ const Contador = () => {
     bolinha: 0,
     cantina: 0,
     diaconia: 0,
-    intercessao: 0,
+    intercessão: 0,
     lojinha: 0,
     louvor: 0,
     zeladoria: 0

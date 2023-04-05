@@ -6,7 +6,7 @@ export interface contagemObreiros{
   bolinha: number;
   cantina: number;
   diaconia: number;
-  intercessao: number;
+  intercessão: number;
   lojinha: number;
   louvor: number;
   zeladoria: number;
