@@ -6,19 +6,43 @@ import { contagemObreiros } from '../../types/ContagemObreiros';
 
 const Contador = () => {
   const [pessoas, setPessoas] = useState<number>(0);
-
+  const [obreiros, setObreiros] = useState<contagemObreiros>({
+    atalaia: 0,
+    assistencia: 0,
+    boasVindas: 0,
+    bolinha: 0,
+    cantina: 0,
+    diaconia: 0,
+    intercessao: 0,
+    lojinha: 0,
+    louvor: 0,
+    zeladoria: 0
+  });
   useEffect(() => {
     async function getConfig() {
       const snapshotObreiros = await getDoc(doc(dadosFirebase, "contagemObreiros", "contador"));
-      const dataObreiros = snapshotObreiros.data() as contagemObreiros | undefined;;
+      const dataObreiros = snapshotObreiros.data() as contagemObreiros | undefined;
       const snapshotPessoas = await getDoc(doc(dadosFirebase, "contagemPessoas", "contador"));
-      const dataPessoas = snapshotPessoas.data() as ContagemPessoas | undefined;;
+      const dataPessoas = snapshotPessoas.data() as ContagemPessoas | undefined;
       if (dataPessoas && dataObreiros) {
+        setObreiros(dataObreiros);
         setPessoas(dataPessoas.resultado);
       }
     }
     getConfig()
-  }, [pessoas]);
+  }, [pessoas,obreiros]);
+
+  function somarPropriedadesNumericas(objeto: contagemObreiros) {
+    let soma = 0;
+    for (let propriedade in objeto) {
+      if (typeof objeto[propriedade] === "number") {
+        soma += objeto[propriedade];
+      }
+    }
+    return soma;
+  }
+  
+  const totalObreiros = somarPropriedadesNumericas(obreiros);
 
   const enviarContagem = () => {
     const novosDados = { resultado: pessoas + 1 };
@@ -50,8 +74,8 @@ const Contador = () => {
   return (
     <>
       <div className='contadorDiv'>
-        <h1 className='totalPessoas'>Total: {pessoas}</h1>
-        <h3> {} Obreiros na Igreja</h3>
+        <h1 className='totalPessoas'>Total: {pessoas + totalObreiros}</h1>
+        <h3> {totalObreiros} Obreiros na Igreja</h3>
         <h2> {pessoas} Pessoas na Igreja</h2>
         <div>
           <button className='botaoContar' onClick={() => {
@@ -63,7 +87,7 @@ const Contador = () => {
         </div>
         <div>
           <button className='botaoResetar' onClick={resetarPessoas}>
-            ResetarEZerar
+            Resetar/Zerar
           </button>
         </div>
       </div>

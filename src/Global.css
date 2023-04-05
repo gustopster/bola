@@ -55,8 +55,18 @@ input[type=number]::-webkit-clear-button {
 .totalPessoas {
     font-size: 2.5rem;
 }
-
 .botaoSalvarObreiros {
+    margin-top: 10vh;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.botaoContar {
     margin-top: 10vh;
     background-color: #ffffff;
     color: #333333;
@@ -74,8 +84,8 @@ input[type=number]::-webkit-clear-button {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
 }
 
-.botaoEnviar {
-    margin-top: 10vh;
+.botaoResetar {
+    margin-top: 5vh;
     background-color: #ffffff;
     color: #333333;
     font-size: 16px;
@@ -86,7 +96,7 @@ input[type=number]::-webkit-clear-button {
     cursor: pointer;
 }
 
-.botaoEnviar:hover {
+.botaoResetar:hover {
     background-color: #29AB87;
     color: #ffffff;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
