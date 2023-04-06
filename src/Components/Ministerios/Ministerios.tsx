@@ -42,33 +42,34 @@ const Ministerios = (props: contagemObreiros) => {
         console.error('Erro ao atualizar o documento:', error);
       });
   };
-
-  const teste = selectedMinistry ? props[selectedMinistry as keyof contagemObreiros] : 0;
-
   return (
     <>
-      {!selectedMinistry && (
-        <div>
-          <p>Selecione um ministério:</p>
-          {MINISTRIES.map((ministry, index) => (
-            <button key={index} onClick={() => selectMinistry(ministry)}>{ministry}</button>
-          ))}
-        </div>
-      )}
-
-      {selectedMinistry && (
-        <div>
-          <label>Atualize quantos estão em {selectedMinistry}:</label>
-          <input 
-            className="inputObreiros"
-            type="number"
-            placeholder="Informe isso aqui"
-            onChange={handleInputValue}
-          />
-          <button className="botaoSalvarObreiros" onClick={enviarContagem}>SALVAR</button>
-          <button onClick={() => setSelectedMinistry(null)}>Voltar</button>
-        </div>
-      )}
+      <div className="divMinisterio">
+        {!selectedMinistry && (
+          <div className="selectedMinistryBox">
+            <p style={{ color: "white" }}>Selecione seu ministério:</p>
+            {MINISTRIES.map((ministry, index) => (
+              <button key={index} className="ministryButton" onClick={() => selectMinistry(ministry)}>
+                {ministry}
+              </button>
+            ))}
+          </div>
+        )}{selectedMinistry && (
+          <div className="selected-ministry">
+            <label>Atualize quantos estão em {selectedMinistry}:</label>
+            <input
+              className="inputObreiros"
+              type="number"
+              placeholder="Informe isso aqui"
+              onChange={handleInputValue}
+            />
+            <div className="button-group">
+              <button className="botaoVoltar" onClick={() => setSelectedMinistry(null)}>VOLTAR</button>
+              <button className="botaoSalvar" onClick={enviarContagem}>SALVAR</button>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

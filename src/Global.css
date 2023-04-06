@@ -55,6 +55,7 @@ input[type=number]::-webkit-clear-button {
 .totalPessoas {
     font-size: 2.5rem;
 }
+
 .botaoSalvarObreiros {
     margin-top: 10vh;
     background-color: #ffffff;
@@ -66,6 +67,7 @@ input[type=number]::-webkit-clear-button {
     transition: all 0.2s ease-in-out;
     cursor: pointer;
 }
+
 .botaoContar {
     margin-top: 10vh;
     background-color: #ffffff;
@@ -257,20 +259,76 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: white;
 }
 
-.botaoSalvarObreiros {
-    margin-top: 10vh;
-    background-color: #ffffff;
-    color: #333333;
-    font-size: 16px;
-    padding: 12px 24px;
-    border-radius: 20px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    transition: all 0.2s ease-in-out;
+.selectedMinistryBox {
+    display: grid;
+    background-color: #333333d3;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.ministryButton {
+    margin-top: 10px;
+    background-color: #555;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.botaoSalvarObreiros:hover {
-    background-color: #29AB87;
+.ministryButton:hover {
+    background-color: #777;
+}
+
+.selected-ministry {
+    background-color: #2c2c2cce;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.selected-ministry label {
     color: #ffffff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+    font-size: 20px;
+}
+
+.selected-ministry input {
+    background-color: #00000086;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.selected-ministry .button-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected-ministry .button-group button {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.selected-ministry .button-group button.botaoSalvar {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+.divMinisterio{
+    margin-top: 25vh;
 }

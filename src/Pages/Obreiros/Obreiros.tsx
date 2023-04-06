@@ -38,9 +38,6 @@ const Obreiros = () => {
   return (
     <>
       <div className='obreirosDiv'>
-        <h1 className='totalObreiros'>Obreiros na Igreja: { }</h1>
-        <div>
-        </div>
         <Ministerios
           atalaia={atalaia}
           assistencia={assistencia}
