@@ -6,6 +6,16 @@ import { contagemObreiros } from '../../types/ContagemObreiros';
 
 const Contador = () => {
   const [pessoas, setPessoas] = useState<number>(0);
+
+  function somarPropriedadesNumericas(objeto: contagemObreiros) {
+    let soma = 0;
+    for (let propriedade in objeto) {
+      if (typeof objeto[propriedade] === "number") {
+        soma += objeto[propriedade];
+      }
+    }
+    return soma;
+  }
   const [obreiros, setObreiros] = useState<contagemObreiros>({
     atalaia: 0,
     assistencia: 0,
@@ -18,6 +28,7 @@ const Contador = () => {
     louvor: 0,
     zeladoria: 0
   });
+  const totalObreiros = somarPropriedadesNumericas(obreiros);
   useEffect(() => {
     async function getConfig() {
       const snapshotObreiros = await getDoc(doc(dadosFirebase, "contagemObreiros", "contador"));
@@ -30,19 +41,7 @@ const Contador = () => {
       }
     }
     getConfig()
-  }, [pessoas,obreiros]);
-
-  function somarPropriedadesNumericas(objeto: contagemObreiros) {
-    let soma = 0;
-    for (let propriedade in objeto) {
-      if (typeof objeto[propriedade] === "number") {
-        soma += objeto[propriedade];
-      }
-    }
-    return soma;
-  }
-  
-  const totalObreiros = somarPropriedadesNumericas(obreiros);
+  }, [pessoas,totalObreiros]);
 
   const enviarContagem = () => {
     const novosDados = { resultado: pessoas + 1 };
