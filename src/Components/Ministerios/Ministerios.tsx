@@ -37,7 +37,10 @@ const Ministerios = (props: contagemObreiros) => {
       [selectedMinistry as string]: ministries[selectedMinistry as string],
     };
     updateDoc(doc(dadosFirebase, "contagemObreiros", "contador"), novosDados)
-      .then(() => { })
+      .then(() => {
+        alert("Obrigado por informar, tenha uma ótima escala!");
+        window.location.reload();
+       })
       .catch((error) => {
         console.error('Erro ao atualizar o documento:', error);
       });

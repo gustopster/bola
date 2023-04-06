@@ -241,12 +241,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 7vh;
 }
 
-.obreirosDiv {
-    margin-top: 10vh;
-}
-
 .inputObreiros {
-    width: 140px;
     font-size: 16px;
     margin-top: 5px;
     margin-left: 5px;
@@ -255,11 +250,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none;
     border-radius: 5px;
     padding: 4px;
-    color: black;
-    background-color: white;
 }
 
 .selectedMinistryBox {
+    margin-top: -12vh;
     display: grid;
     background-color: #333333d3;
     border-radius: 10px;

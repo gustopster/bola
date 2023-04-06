@@ -36,22 +36,18 @@ const Obreiros = () => {
     getConfig();
   }, []);
   return (
-    <>
-      <div className='obreirosDiv'>
-        <Ministerios
-          atalaia={atalaia}
-          assistencia={assistencia}
-          boasVindas={boasVindas}
-          bolinha={bolinha}
-          cantina={cantina}
-          diaconia={diaconia}
-          intercessão={intercessão}
-          lojinha={lojinha}
-          louvor={louvor}
-          zeladoria={zeladoria}
-        />
-      </div>
-    </>
+    <Ministerios
+      atalaia={atalaia}
+      assistencia={assistencia}
+      boasVindas={boasVindas}
+      bolinha={bolinha}
+      cantina={cantina}
+      diaconia={diaconia}
+      intercessão={intercessão}
+      lojinha={lojinha}
+      louvor={louvor}
+      zeladoria={zeladoria}
+    />
   );
 }
 
