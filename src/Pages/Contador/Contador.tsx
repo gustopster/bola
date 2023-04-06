@@ -17,16 +17,16 @@ const Contador = () => {
     return soma;
   }
   const [obreiros, setObreiros] = useState<contagemObreiros>({
-    atalaia: 0,
-    assistencia: 0,
-    boasVindas: 0,
-    bolinha: 0,
-    cantina: 0,
-    diaconia: 0,
-    intercessão: 0,
-    lojinha: 0,
-    louvor: 0,
-    zeladoria: 0
+    "Lojinha": 0,
+    "Intercessão": 0,
+    "BoasVindas": 0,
+    "Zeladoria": 0,
+    "Atalaia": 0,
+    "Cantina": 0,
+    "Diaconia": 0,
+    "Louvor": 0,
+    "Assistência": 0,
+    "Bolinha": 0
   });
   const totalObreiros = somarPropriedadesNumericas(obreiros);
   useEffect(() => {
@@ -41,7 +41,7 @@ const Contador = () => {
       }
     }
     getConfig()
-  }, [pessoas,totalObreiros]);
+  }, [pessoas, totalObreiros]);
 
   const enviarContagem = () => {
     const novosDados = { resultado: pessoas + 1 };
@@ -56,18 +56,39 @@ const Contador = () => {
     const confirmacao = window.confirm('Tem certeza que deseja resetar o número de pessoas?');
     if (confirmacao) {
       // salvar os dados antes de resetar
-      const dadosAntesDoReset = { resultado: pessoas};
+      const dadosAntesDoReset = { resultado: pessoas + totalObreiros };
       await addDoc(collection(dadosFirebase, "dadosAntesDoReset"), dadosAntesDoReset);
 
       // resetar o número de pessoas
-      const novosDados = { resultado: 0 };
-      updateDoc(doc(dadosFirebase, "contagemPessoas", "contador"), novosDados)
+      const novosDadosPessoas = { resultado: 0 };
+      const novosDadosObreiros = {
+        "Lojinha": 0,
+        "Intercessão": 0,
+        "BoasVindas": 0,
+        "Zeladoria": 0,
+        "Atalaia": 0,
+        "Cantina": 0,
+        "Diaconia": 0,
+        "Louvor": 0,
+        "Assistência": 0,
+        "Bolinha": 0
+      }
+      updateDoc(doc(dadosFirebase, "contagemPessoas", "contador"), novosDadosPessoas)
         .then(() => {
           setPessoas(0);
         })
         .catch((error) => {
           console.error('Erro ao atualizar o documento:', error);
         });
+      updateDoc(doc(dadosFirebase, "contagemObreiros", "contador"), novosDadosObreiros)
+        .then(() => {
+          setPessoas(0);
+        })
+        .catch((error) => {
+          console.error('Erro ao atualizar o documento:', error);
+        });
+      alert("Contagem salva com sucesso.");
+      window.location.reload();
     }
   }
   return (
@@ -86,7 +107,7 @@ const Contador = () => {
         </div>
         <div>
           <button className='botaoResetar' onClick={resetarPessoas}>
-            Resetar/Zerar
+            Salvar Contagem e Zerar
           </button>
         </div>
       </div>

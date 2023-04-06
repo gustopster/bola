@@ -6,7 +6,7 @@ import { contagemObreiros } from "../../types/ContagemObreiros";
 const MINISTRIES = [
   "Atalaia",
   "Assistência",
-  "Boas Vindas",
+  "BoasVindas",
   "Bolinha",
   "Cantina",
   "Diaconia",

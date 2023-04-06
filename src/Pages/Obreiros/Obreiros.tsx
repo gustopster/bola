@@ -21,33 +21,22 @@ const Obreiros = () => {
       const snapshot = await getDoc(doc(dadosFirebase, "contagemObreiros", "contador"));
       const data = snapshot.data() as contagemObreiros | undefined;
       if (data) {
-        setAssistencia(data.assistencia);
-        setAtalaia(data.atalaia);
-        setBoasVindas(data.boasVindas);
-        setBolinha(data.bolinha);
-        setCantina(data.cantina);
-        setDiaconia(data.diaconia);
-        setIntercessão(data.intercessão);
-        setLojinha(data.lojinha);
-        setLouvor(data.louvor);
-        setZeladoria(data.zeladoria);
+        setAssistencia(data.Assistência);
+        setAtalaia(data.Atalaia);
+        setBoasVindas(data.BoasVindas);
+        setBolinha(data.Bolinha);
+        setCantina(data.Cantina);
+        setDiaconia(data.Diaconia);
+        setIntercessão(data.Intercessão);
+        setLojinha(data.Lojinha);
+        setLouvor(data.Lojinha);
+        setZeladoria(data.Zeladoria);
       }
     }
     getConfig();
   }, []);
   return (
-    <Ministerios
-      atalaia={atalaia}
-      assistencia={assistencia}
-      boasVindas={boasVindas}
-      bolinha={bolinha}
-      cantina={cantina}
-      diaconia={diaconia}
-      intercessão={intercessão}
-      lojinha={lojinha}
-      louvor={louvor}
-      zeladoria={zeladoria}
-    />
+    <Ministerios BoasVindas={boasVindas} Lojinha={lojinha} Intercessão={intercessão} Zeladoria={zeladoria} Atalaia={atalaia} Cantina={cantina} Diaconia={cantina} Louvor={louvor} Assistência={assistencia} Bolinha={bolinha} />
   );
 }
 
