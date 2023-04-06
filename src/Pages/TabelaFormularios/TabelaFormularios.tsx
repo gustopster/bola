@@ -1,32 +1,58 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy, where, Timestamp } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, where, Timestamp, doc } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/firebaseServer';
 import { TabelaFormulario } from '../../types/TabelaFormulario';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 function TabelaFormularios() {
+  const [contagem, setContagem] = useState<number>(0);
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
   const [dataSelecionada, setDataSelecionada] = useState<number>(0); // inicializa com valor 0
   const handleDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = new Date(event.target.value); // cria um objeto Date com a data selecionada
     setDataSelecionada(selectedDate.getTime()); // armazena o valor em milissegundos no estado
   };
+  const [contagemSelecionada, setContagemSelecionada] = useState<number>(0);
+
   useEffect(() => {
     const fetchFormularios = async () => {
-      let q = query(collection(dadosFirebase, 'formularios'), orderBy('createdAt', 'desc'));
+      let queryData = query(collection(dadosFirebase, 'formularios'), orderBy('createdAt', 'desc'));
       if (dataSelecionada > 0) {
         // converte o valor em milissegundos em um objeto Timestamp do Firebase
         const timestamp = Timestamp.fromMillis(dataSelecionada);
         // adiciona uma cláusula 'where' na consulta para filtrar os resultados pela data selecionada
-        q = query(q, where('createdAt', '>=', timestamp), where('createdAt', '<', Timestamp.fromMillis(dataSelecionada + 86400000)));
+        queryData = query(queryData, where('createdAt', '>=', timestamp), where('createdAt', '<', Timestamp.fromMillis(dataSelecionada + 86400000)));
       }
-      const querySnapshot = await getDocs(q);
+
+      // Busca a contagem no Firebase
+      const contagemSnapshot = await getDocs(collection(dadosFirebase, "dadosAntesDoReset"));
+      const contagemConvertida = contagemSnapshot.docs.map((doc) => doc.data());
+      // Busca os dados dos formulários no Firebase
+      const querySnapshot = await getDocs(queryData);
       const dados: TabelaFormulario[] = [];
       querySnapshot.forEach((doc) => {
-        dados.push({ id: doc.id, ...doc.data() } as TabelaFormulario);
+        dados.push({ id: doc.id, ...doc.data(), } as TabelaFormulario);
       });
+
+      // Atualiza os estados contagem e formularios
+      console.log(contagemConvertida)
+      setContagem(contagemConvertida[0].resultado);
       setFormularios(dados);
     };
-    fetchFormularios();
+    const fetchContagemSelecionada = async () => {
+      if (dataSelecionada > 0) {
+        const timestamp = Timestamp.fromMillis(dataSelecionada);
+        const querySnapshot = await getDocs(
+          query(collection(dadosFirebase, 'dadosAntesDoReset'), where('createdAt', '>=', timestamp), where('createdAt', '<', Timestamp.fromMillis(dataSelecionada + 86400000)))
+        );
+        if (querySnapshot.docs.length > 0) {
+          setContagemSelecionada(querySnapshot.docs[0].data().resultado);
+        } else {
+          setContagemSelecionada(0);
+        }
+      }
+    }; fetchFormularios();
+    fetchContagemSelecionada();
+
   }, [dataSelecionada]);
   return (
     <>
@@ -35,6 +61,14 @@ function TabelaFormularios() {
         <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>
         <input type="date" id="data" name="data" value={dataSelecionada > 0 ? new Date(dataSelecionada).toISOString().substr(0, 10) : ''} onChange={handleDataChange} />
       </div>
+
+      {dataSelecionada > 0 && (
+        <div>
+          <h2>Total de pessoas nesse Culto: {contagemSelecionada}</h2>
+        </div>
+      )}
+
+
       <table className='tabelaDiv'>
         <thead>
           <tr>
