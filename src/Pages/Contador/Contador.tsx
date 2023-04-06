@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { doc, getDoc, updateDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { dadosFirebase } from '../../services/firebaseServer';
 import { ContagemPessoas } from '../../types/ContagemPessoas';
 import { contagemObreiros } from '../../types/ContagemObreiros';
@@ -56,7 +56,10 @@ const Contador = () => {
     const confirmacao = window.confirm('Tem certeza que deseja resetar o número de pessoas?');
     if (confirmacao) {
       // salvar os dados antes de resetar
-      const dadosAntesDoReset = { resultado: pessoas + totalObreiros };
+      const dadosAntesDoReset = { 
+        resultado: pessoas + totalObreiros, 
+        createdAt: serverTimestamp(), 
+      };
       await addDoc(collection(dadosFirebase, "dadosAntesDoReset"), dadosAntesDoReset);
 
       // resetar o número de pessoas
