@@ -360,7 +360,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: black;
     border: none;
     padding: 10px;
-    font-size: 9px;
+    font-size: 16px;
     border-radius: 5px;
     margin-bottom: 20px;
     width: 50%;
