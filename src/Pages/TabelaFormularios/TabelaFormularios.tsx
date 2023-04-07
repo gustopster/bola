@@ -53,18 +53,33 @@ function TabelaFormularios() {
     fetchContagemSelecionada();
 
   }, [dataSelecionada]);
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
-    <button
-    className={"senhasTabela"}
-    onClick={()=>{
-      console.log(usuarios)
-    }}>SENHAS</button>
+      <button
+        className={"senhasTabela"}
+        onClick={() => {
+          setShowModal(true)
+          console.log(usuarios)
+        }}>SENHAS</button>
+
       <div className='divVisitantesTable'>
         <h1>Tabela de Visitantes</h1>
         <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>
         <input type="date" id="data" name="data" value={dataSelecionada > 0 ? new Date(dataSelecionada).toISOString().substr(0, 10) : ''} onChange={handleDataChange} />
       </div>
+      {showModal && (
+        <div className="modalTabelaSenha">
+          <div className="modalTabelaSenha-content">
+            <span className="modalTabelaSenha-close" onClick={() => setShowModal(false)}>
+              &times;
+            </span>
+            <p>A senha acessar os Apps Boas Vindas é: "{usuarios?.boas}"</p>
+            <p>A senha atual do Dashboard é: "{usuarios?.adm}"</p>
+          </div>
+        </div>
+      )}
+
 
       {dataSelecionada > 0 && (
         <div>
