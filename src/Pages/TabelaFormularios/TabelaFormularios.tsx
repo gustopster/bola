@@ -54,14 +54,17 @@ function TabelaFormularios() {
 
   }, [dataSelecionada]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPassword, setSelectedPassword] = useState('');
   return (
     <>
       <button
         className={"senhasTabela"}
         onClick={() => {
-          setShowModal(true)
-          console.log(usuarios)
-        }}>SENHAS</button>
+          setShowModal(true);
+          setSelectedPassword('');
+        }}>
+        SENHAS
+      </button>
 
       <div className='divVisitantesTable'>
         <h1>Tabela de Visitantes</h1>
@@ -74,20 +77,47 @@ function TabelaFormularios() {
             <span className="modalTabelaSenha-close" onClick={() => setShowModal(false)}>
               &times;
             </span>
-            <p>A senha acessar os Apps Boas Vindas é: "{usuarios?.boas}"</p>
-            <p>A senha atual do Dashboard é: "{usuarios?.adm}"</p>
+            <div className="containerSenha">
+              <label className='containerSenhaLabel' htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
+              <select 
+                className='containerSenhaSelect'
+                style={{ marginLeft: "10px" }}
+                value={selectedPassword}
+                onChange={(event) => setSelectedPassword(event.target.value)}
+                id="select-senhas">
+                <option className='containerSenhaOption'>Selecione...</option>
+                <option className='containerSenhaOption'>App Boas Vindas</option>
+                <option className='containerSenhaOption'>DashBoard</option>
+              </select>
+              {selectedPassword === 'App Boas Vindas' && (
+                <>
+                <div className='respostaSenha'>
+                <label htmlFor="nova-senha">Nova senha:</label>
+                <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
+                <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
+                <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
+                </div>
+              </>
+              )}
+              {selectedPassword === 'DashBoard' && (
+                <>
+                  <div className='respostaSenha'>
+                  <label htmlFor="nova-senha">Nova senha:</label>
+                  <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
+                  <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
+                  <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}
-
-
       {dataSelecionada > 0 && (
         <div>
           <h2>Total de pessoas nesse Culto: {contagemSelecionada}</h2>
         </div>
       )}
-
-
       <table className='tabelaDiv'>
         <thead>
           <tr>
