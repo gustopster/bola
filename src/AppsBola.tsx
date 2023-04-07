@@ -5,6 +5,7 @@ import Home from "./Pages/Home/Home";
 import Visitantes from "./Pages/Visitantes/Visitantes";
 import Obreiros from "./Pages/Obreiros/Obreiros";
 import VerificarUser from "./Pages/TabelaFormularios/VerificarUser";
+import { usuarios } from "./services/firebaseServer";
 
 export default function AppsBola() {
   const [textoDoMenu, setTextoDoMenu] = useState<string>("");
@@ -15,7 +16,7 @@ export default function AppsBola() {
 
   function handleEntrar() {
     // Aqui você pode fazer outras validações, como verificar se a senha é válida
-    if (inputSenha === "minhasenha") {
+    if (inputSenha === usuarios?.boas) {
       setSenha(inputSenha);
       setModalAberto(false);
       setBotaoLoginVisivel(false);
@@ -66,7 +67,7 @@ export default function AppsBola() {
       {textoDoMenu === "Obreiros" && <Obreiros />}
       {senha === "minhasenha" && textoDoMenu === "Contador" && <Contador />}
       {senha === "minhasenha" && textoDoMenu === "Visitantes" && <Visitantes />}
-      {senha === "minhasenha" && textoDoMenu === "Tabela" && <VerificarUser />}
+      {senha === "minhasenha" && textoDoMenu === "DashBoard" && <VerificarUser />}
     </>
   );
 }

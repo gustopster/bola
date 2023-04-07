@@ -40,7 +40,7 @@ export default function MenuHamburger(props: { onTextoDoMenuChange: (texto: stri
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Obreiros", "Contador", "Visitantes", "Tabela"].map((text, index) => (
+        {["Home", "Obreiros", "Contador", "Visitantes", "DashBoard"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleTextMenu(text)}>
               <ListItemIcon>

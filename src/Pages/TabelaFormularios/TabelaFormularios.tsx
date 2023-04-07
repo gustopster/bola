@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy, where, Timestamp, doc } from 'firebase/firestore';
-import { dadosFirebase } from '../../services/firebaseServer';
+import { dadosFirebase, usuarios } from '../../services/firebaseServer';
 import { TabelaFormulario } from '../../types/TabelaFormulario';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 function TabelaFormularios() {
@@ -34,7 +34,6 @@ function TabelaFormularios() {
       });
 
       // Atualiza os estados contagem e formularios
-      console.log(contagemConvertida)
       setContagem(contagemConvertida[0].resultado);
       setFormularios(dados);
     };
@@ -56,6 +55,11 @@ function TabelaFormularios() {
   }, [dataSelecionada]);
   return (
     <>
+    <button
+    className={"senhasTabela"}
+    onClick={()=>{
+      console.log(usuarios)
+    }}>SENHAS</button>
       <div className='divVisitantesTable'>
         <h1>Tabela de Visitantes</h1>
         <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>

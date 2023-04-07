@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { usuarios } from '../../services/firebaseServer';
 import TabelaFormularios from './TabelaFormularios';
 
 function VerificarUser() {
@@ -6,7 +7,7 @@ function VerificarUser() {
   const [acessoPermitido, setAcessoPermitido] = useState(false);
 
   const verificarSenha = () => {
-    if (senha === '123') {
+    if (senha === usuarios?.adm) {
       setAcessoPermitido(true);
     } else {
       alert('Senha incorreta. Por favor, entre em contato com o líder do ministério para obter acesso.');
@@ -19,11 +20,11 @@ function VerificarUser() {
         <>
           <div className="container-verificar-user">
             <label htmlFor="senha">
-              Senha:
+              Área Administrativa:
               <input
                 id="senha"
                 className="input-senha-verifica"
-                placeholder="Digite a senha da tabela"
+                placeholder="Digite sua senha"
                 type="password"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
