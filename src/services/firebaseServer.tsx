@@ -4,14 +4,13 @@ import firebaseConfig from "./firebaseConfig"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const dadosFirebase = doc(db, "/SERVER/BOLA")
-const getAll = async ()=>{
+const getAll = async () => {
     const snapshot = await getDoc(doc(dadosFirebase, "perfis", "usuarios"));
     const data = snapshot.data();
-    if(data !== undefined){
+    if (data !== undefined) {
         /* console.log(data) */
         return data;
     }
 }
-export const usuarios= await getAll()
-console.log(usuarios)
+export const usuarios = getAll();
 export { dadosFirebase };

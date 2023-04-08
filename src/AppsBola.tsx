@@ -4,8 +4,9 @@ import Contador from "./Pages/Contador/Contador";
 import Home from "./Pages/Home/Home";
 import Visitantes from "./Pages/Visitantes/Visitantes";
 import Obreiros from "./Pages/Obreiros/Obreiros";
-import VerificarUser from "./Pages/TabelaFormularios/VerificarUser";
 import { usuarios } from "./services/firebaseServer";
+import { DocumentData } from "firebase/firestore";
+import TabelaFormularios from "./Pages/TabelaFormularios/TabelaFormularios";
 
 export default function AppsBola() {
   const [textoDoMenu, setTextoDoMenu] = useState<string>("");
@@ -14,9 +15,10 @@ export default function AppsBola() {
   const [inputSenha, setInputSenha] = useState<string>("");
   const [botaoLoginVisivel, setBotaoLoginVisivel] = useState<boolean>(true);
 
-  function handleEntrar() {
+  async function handleEntrar() {
+    const users: DocumentData | undefined = await usuarios;
     // Aqui você pode fazer outras validações, como verificar se a senha é válida
-    if (inputSenha === usuarios?.boas) {
+    if (inputSenha === users?.boas) {
       setSenha(inputSenha);
       setModalAberto(false);
       setBotaoLoginVisivel(false);
@@ -67,7 +69,7 @@ export default function AppsBola() {
       {textoDoMenu === "Obreiros" && <Obreiros />}
       {senha === "minhasenha" && textoDoMenu === "Contador" && <Contador />}
       {senha === "minhasenha" && textoDoMenu === "Visitantes" && <Visitantes />}
-      {senha === "minhasenha" && textoDoMenu === "DashBoard" && <VerificarUser />}
+      {senha === "minhasenha" && textoDoMenu === "DashBoard" && <TabelaFormularios />}
     </>
   );
 }

@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy, where, Timestamp, doc } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, where, Timestamp, doc, DocumentData } from 'firebase/firestore';
 import { dadosFirebase, usuarios } from '../../services/firebaseServer';
 import { TabelaFormulario } from '../../types/TabelaFormulario';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+type userType = {
+  adm: string;
+  boas: string
+}
 function TabelaFormularios() {
   const [contagem, setContagem] = useState<number>(0);
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
@@ -55,101 +59,138 @@ function TabelaFormularios() {
   }, [dataSelecionada]);
   const [showModal, setShowModal] = useState(false);
   const [selectedPassword, setSelectedPassword] = useState('');
+  const users: Promise<userType | DocumentData | undefined> = usuarios;
+  const [senha, setSenha] = useState('');
+  const [acessoPermitido, setAcessoPermitido] = useState(false);
+
+  const verificarSenha = async () => {
+    if (senha === (await users)?.adm) {
+      setAcessoPermitido(true);
+    } else {
+      alert('Senha incorreta. Por favor, entre em contato com o líder do ministério para obter acesso.');
+    }
+  }
+
   return (
     <>
-      <button
-        className={"senhasTabela"}
-        onClick={() => {
-          setShowModal(true);
-          setSelectedPassword('');
-        }}>
-        SENHAS
-      </button>
-
-      <div className='divVisitantesTable'>
-        <h1>Tabela de Visitantes</h1>
-        <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>
-        <input type="date" id="data" name="data" value={dataSelecionada > 0 ? new Date(dataSelecionada).toISOString().substr(0, 10) : ''} onChange={handleDataChange} />
-      </div>
-      {showModal && (
-        <div className="modalTabelaSenha">
-          <div className="modalTabelaSenha-content">
-            <span className="modalTabelaSenha-close" onClick={() => setShowModal(false)}>
-              &times;
-            </span>
-            <div className="containerSenha">
-              <label className='containerSenhaLabel' htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
-              <select 
-                className='containerSenhaSelect'
-                style={{ marginLeft: "10px" }}
-                value={selectedPassword}
-                onChange={(event) => setSelectedPassword(event.target.value)}
-                id="select-senhas">
-                <option className='containerSenhaOption'>Selecione...</option>
-                <option className='containerSenhaOption'>App Boas Vindas</option>
-                <option className='containerSenhaOption'>DashBoard</option>
-              </select>
-              {selectedPassword === 'App Boas Vindas' && (
-                <>
-                <div className='respostaSenha'>
-                <label htmlFor="nova-senha">Nova senha:</label>
-                <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
-                <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
-                <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
-                </div>
-              </>
-              )}
-              {selectedPassword === 'DashBoard' && (
-                <>
-                  <div className='respostaSenha'>
-                  <label htmlFor="nova-senha">Nova senha:</label>
-                  <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
-                  <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
-                  <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
-                  </div>
-                </>
-              )}
+        {!acessoPermitido && (
+          <>
+            <div className="container-verificar-user">
+              <label htmlFor="senha">
+                Área Administrativa:
+                <input
+                  id="senha"
+                  className="input-senha-verifica"
+                  placeholder="Digite sua senha"
+                  type="password"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+              </label>
+              <button className="botao-entrar-verifica" onClick={verificarSenha}>
+                Entrar
+              </button>
             </div>
-          </div>
-        </div>
-      )}
-      {dataSelecionada > 0 && (
-        <div>
-          <h2>Total de pessoas nesse Culto: {contagemSelecionada}</h2>
-        </div>
-      )}
-      <table className='tabelaDiv'>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>WhatsApp</th>
-            <th>Bairro</th>
-            <th>Culto</th>
-            <th>Como Conheceu o Bola?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {formularios.map((formulario) => (
-            <tr key={formulario.id}>
-              <td>{formulario.nome}</td>
-              <td>{formulario.email}</td>
-              <td>
-                <a
-                  href={`https://api.whatsapp.com/send?phone=${formulario.whatsApp}&text=Olá%20Somos%20do%20Bola%20de%20Neve%20Sorocaba,%20estamos%20entrando%20em%20contato%20pois%20você%20nos%20deu%20o%20seu%20contato.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className='linkTabela'
-                >{formulario.whatsApp}<WhatsAppIcon sx={{ marginLeft: '10px' }} fontSize='medium' />
-                </a>
-              </td>
-              <td>{formulario.bairro}</td>
-              <td>{formulario.perguntaCulto}</td>
-              <td>{formulario.pergunta}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          </>
+        )}
+        {acessoPermitido && (
+          <>
+
+            <button
+              className={"senhasTabela"}
+              onClick={() => {
+                setShowModal(true);
+                setSelectedPassword('');
+              }}>
+              SENHAS
+            </button>
+
+            <div className='divVisitantesTable'>
+              <h1>Tabela de Visitantes</h1>
+              <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>
+              <input type="date" id="data" name="data" value={dataSelecionada > 0 ? new Date(dataSelecionada).toISOString().substr(0, 10) : ''} onChange={handleDataChange} />
+            </div>
+            {showModal && (
+              <div className="modalTabelaSenha">
+                <div className="modalTabelaSenha-content">
+                  <span className="modalTabelaSenha-close" onClick={() => setShowModal(false)}>
+                    &times;
+                  </span>
+                  <div className="containerSenha">
+                    <label className='containerSenhaLabel' htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
+                    <select
+                      className='containerSenhaSelect'
+                      style={{ marginLeft: "10px" }}
+                      value={selectedPassword}
+                      onChange={(event) => setSelectedPassword(event.target.value)}
+                      id="select-senhas">
+                      <option className='containerSenhaOption'>Selecione...</option>
+                      <option className='containerSenhaOption'>App Boas Vindas</option>
+                      <option className='containerSenhaOption'>DashBoard</option>
+                    </select>
+                    {selectedPassword === 'App Boas Vindas' && (
+                      <>
+                        <div className='respostaSenha'>
+                          <label htmlFor="nova-senha">Nova senha:</label>
+                          <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
+                          <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
+                          <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
+                        </div>
+                      </>
+                    )}
+                    {selectedPassword === 'DashBoard' && (
+                      <>
+                        <div className='respostaSenha'>
+                          <label htmlFor="nova-senha">Nova senha:</label>
+                          <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
+                          <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
+                          <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+            {dataSelecionada > 0 && (
+              <div>
+                <h2>Total de pessoas nesse Culto: {contagemSelecionada}</h2>
+              </div>
+            )}
+            <table className='tabelaDiv'>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>WhatsApp</th>
+                  <th>Bairro</th>
+                  <th>Culto</th>
+                  <th>Como Conheceu o Bola?</th>
+                </tr>
+              </thead>
+              <tbody>
+                {formularios.map((formulario) => (
+                  <tr key={formulario.id}>
+                    <td>{formulario.nome}</td>
+                    <td>{formulario.email}</td>
+                    <td>
+                      <a
+                        href={`https://api.whatsapp.com/send?phone=${formulario.whatsApp}&text=Olá%20Somos%20do%20Bola%20de%20Neve%20Sorocaba,%20estamos%20entrando%20em%20contato%20pois%20você%20nos%20deu%20o%20seu%20contato.`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className='linkTabela'
+                      >{formulario.whatsApp}<WhatsAppIcon sx={{ marginLeft: '10px' }} fontSize='medium' />
+                      </a>
+                    </td>
+                    <td>{formulario.bairro}</td>
+                    <td>{formulario.perguntaCulto}</td>
+                    <td>{formulario.pergunta}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
     </>
   );
 }
