@@ -117,7 +117,7 @@ function TabelaFormularios() {
                     &times;
                   </span>
                   <div className="containerSenha">
-                    <label className='containerSenhaLabel' htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
+                    <label htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
                     <select
                       className='containerSenhaSelect'
                       style={{ marginLeft: "10px" }}
@@ -131,9 +131,9 @@ function TabelaFormularios() {
                     {selectedPassword === 'App Boas Vindas' && (
                       <>
                         <div className='respostaSenha'>
-                          <label htmlFor="nova-senha">Nova senha:</label>
+                          <label className='containerSenhaLabel' htmlFor="nova-senha">Nova senha:</label>
                           <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
-                          <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
+                          <label className='containerSenhaLabel' htmlFor="confirmar-senha">Confirme:</label>
                           <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
                         </div>
                       </>
@@ -141,9 +141,9 @@ function TabelaFormularios() {
                     {selectedPassword === 'DashBoard' && (
                       <>
                         <div className='respostaSenha'>
-                          <label htmlFor="nova-senha">Nova senha:</label>
+                          <label className='containerSenhaLabel' htmlFor="nova-senha">Nova senha:</label>
                           <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
-                          <label htmlFor="confirmar-senha">Confirmar nova senha:</label>
+                          <label className='containerSenhaLabel' htmlFor="confirmar-senha">Confirme:</label>
                           <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
                         </div>
                       </>
