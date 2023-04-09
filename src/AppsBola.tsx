@@ -18,7 +18,7 @@ export default function AppsBola() {
   async function handleEntrar() {
     const users: DocumentData | undefined = await usuarios;
     // Aqui você pode fazer outras validações, como verificar se a senha é válida
-    if (inputSenha === users?.boas) {
+    if (inputSenha === users?.[`App-Boas-Vindas`]) {
       setSenha(inputSenha);
       setModalAberto(false);
       setBotaoLoginVisivel(false);
@@ -67,9 +67,9 @@ export default function AppsBola() {
       <MenuHamburger onTextoDoMenuChange={setTextoDoMenu} />
       {(textoDoMenu === "Home" || textoDoMenu === "") && <Home />}
       {textoDoMenu === "Obreiros" && <Obreiros />}
-      {senha === "minhasenha" && textoDoMenu === "Contador" && <Contador />}
-      {senha === "minhasenha" && textoDoMenu === "Visitantes" && <Visitantes />}
-      {senha === "minhasenha" && textoDoMenu === "DashBoard" && <TabelaFormularios />}
+      {senha === "" && textoDoMenu === "Contador" && <Contador />}
+      {senha === "" && textoDoMenu === "Visitantes" && <Visitantes />}
+      {senha === "" && textoDoMenu === "DashBoard" && <TabelaFormularios />}
     </>
   );
 }

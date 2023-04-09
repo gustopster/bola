@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy, where, Timestamp, doc, DocumentData } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, where, Timestamp, doc, DocumentData, updateDoc } from 'firebase/firestore';
 import { dadosFirebase, usuarios } from '../../services/firebaseServer';
 import { TabelaFormulario } from '../../types/TabelaFormulario';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-type userType = {
-  adm: string;
-  boas: string
-}
+import { userType } from '../../types/User';
+
 function TabelaFormularios() {
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
   const [dataSelecionada, setDataSelecionada] = useState<number>(0); // inicializa com valor 0
@@ -54,7 +52,8 @@ function TabelaFormularios() {
   const [senha, setSenha] = useState('');
   const [acessoPermitido, setAcessoPermitido] = useState(false);
   const verificarSenha = async () => {
-    if (senha === (await users)?.adm) {
+
+    if (senha === (await users)?.DashBoard) {
       setAcessoPermitido(true);
     } else {
       alert('Senha incorreta. Por favor, entre em contato com o líder do ministério para obter acesso.');
@@ -63,30 +62,30 @@ function TabelaFormularios() {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-  function handlePassword1Change(event: { target: { value: string; }; }) {
-    const newPassword1 = event.target.value;
-    setPassword1(newPassword1);
-  }
-
-  function handlePassword2Change(event: { target: { value: string; }; }) {
-    const newPassword2 = event.target.value;
-    setPassword2(newPassword2);
-  }
-
-  function handleSubmit(event: { preventDefault: () => void; }) {
-    event.preventDefault();
-    const passwordsMatch = password1 === password2;
-
-    if (passwordsMatch) {
-      alert("Senha alterada com sucesso!");
-      setShowModal(false);
-      setPassword2("");
-      setPassword1("");
-      // Aqui você pode fazer algo com as senhas, como enviar para o servidor
-    } else {
-      alert('As senhas devem ser iguais!');
+  async function handleSubmit(evento: { preventDefault: () => void; }) {
+    evento.preventDefault();
+    if (selectedPassword) {
+      if (password1 === "" || password2 === "") {
+        alert("Não pode ser vazio");
+      } else if (password1 !== password2) {
+        alert("As senhas devem ser iguais!");
+      } else {
+        alert("Senha alterada com sucesso!")
+        const resultado = password2;
+        const data = await usuarios;
+        if (data) {
+          data[selectedPassword] = resultado;
+          await updateDoc(doc(dadosFirebase, 'perfis/usuarios'), { [selectedPassword]: resultado });
+          setShowModal(false);
+          setPassword1("");
+          setPassword2("");
+        } else {
+          console.log("Não foi possível atualizar a senha. Tente novamente mais tarde.");
+        }
+      }
     }
   }
+
   return (
     <>
       {!acessoPermitido && (
@@ -139,20 +138,20 @@ function TabelaFormularios() {
                     onChange={(event) => setSelectedPassword(event.target.value)}
                     id="select-senhas">
                     <option className='containerSenhaOption'>Selecione...</option>
-                    <option className='containerSenhaOption'>App Boas Vindas</option>
+                    <option className='containerSenhaOption'>App-Boas-Vindas</option>
                     <option className='containerSenhaOption'>DashBoard</option>
                   </select>
-                  {selectedPassword === 'App Boas Vindas' && (
+                  {selectedPassword === 'App-Boas-Vindas' && (
                     <>
                       <div className='respostaSenha'>
                         <form onSubmit={handleSubmit}>
                           <label>
                             Senha:
-                            <input type="password" value={password1} onChange={handlePassword1Change} />
+                            <input type="password" value={password1} onChange={e => setPassword1(e.target.value)} />
                           </label>
                           <label>
                             Confirme a senha:
-                            <input type="password" value={password2} onChange={handlePassword2Change} />
+                            <input type="password" value={password2} onChange={e => setPassword2(e.target.value)} />
                           </label>
                           <button type="submit">Enviar</button>
                         </form>
@@ -165,11 +164,11 @@ function TabelaFormularios() {
                         <form onSubmit={handleSubmit}>
                           <label>
                             Senha:
-                            <input type="password" value={password1} onChange={handlePassword1Change} />
+                            <input type="password" value={password1} onChange={e => setPassword1(e.target.value)} />
                           </label>
                           <label>
                             Confirme a senha:
-                            <input type="password" value={password2} onChange={handlePassword2Change} />
+                            <input type="password" value={password2} onChange={e => setPassword2(e.target.value)} />
                           </label>
                           <button type="submit">Enviar</button>
                         </form>
