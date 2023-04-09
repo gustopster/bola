@@ -8,7 +8,6 @@ type userType = {
   boas: string
 }
 function TabelaFormularios() {
-  const [contagem, setContagem] = useState<number>(0);
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
   const [dataSelecionada, setDataSelecionada] = useState<number>(0); // inicializa com valor 0
   const handleDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +15,6 @@ function TabelaFormularios() {
     setDataSelecionada(selectedDate.getTime()); // armazena o valor em milissegundos no estado
   };
   const [contagemSelecionada, setContagemSelecionada] = useState<number>(0);
-
   useEffect(() => {
     const fetchFormularios = async () => {
       let queryData = query(collection(dadosFirebase, 'formularios'), orderBy('createdAt', 'desc'));
@@ -26,19 +24,13 @@ function TabelaFormularios() {
         // adiciona uma cláusula 'where' na consulta para filtrar os resultados pela data selecionada
         queryData = query(queryData, where('createdAt', '>=', timestamp), where('createdAt', '<', Timestamp.fromMillis(dataSelecionada + 86400000)));
       }
-
       // Busca a contagem no Firebase
-      const contagemSnapshot = await getDocs(collection(dadosFirebase, "dadosAntesDoReset"));
-      const contagemConvertida = contagemSnapshot.docs.map((doc) => doc.data());
-      // Busca os dados dos formulários no Firebase
       const querySnapshot = await getDocs(queryData);
       const dados: TabelaFormulario[] = [];
       querySnapshot.forEach((doc) => {
         dados.push({ id: doc.id, ...doc.data(), } as TabelaFormulario);
       });
-
       // Atualiza os estados contagem e formularios
-      setContagem(contagemConvertida[0].resultado);
       setFormularios(dados);
     };
     const fetchContagemSelecionada = async () => {
@@ -55,14 +47,12 @@ function TabelaFormularios() {
       }
     }; fetchFormularios();
     fetchContagemSelecionada();
-
   }, [dataSelecionada]);
   const [showModal, setShowModal] = useState(false);
   const [selectedPassword, setSelectedPassword] = useState('');
   const users: Promise<userType | DocumentData | undefined> = usuarios;
   const [senha, setSenha] = useState('');
   const [acessoPermitido, setAcessoPermitido] = useState(false);
-
   const verificarSenha = async () => {
     if (senha === (await users)?.adm) {
       setAcessoPermitido(true);
@@ -70,127 +60,165 @@ function TabelaFormularios() {
       alert('Senha incorreta. Por favor, entre em contato com o líder do ministério para obter acesso.');
     }
   }
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
 
+  function handlePassword1Change(event: { target: { value: string; }; }) {
+    const newPassword1 = event.target.value;
+    setPassword1(newPassword1);
+  }
+
+  function handlePassword2Change(event: { target: { value: string; }; }) {
+    const newPassword2 = event.target.value;
+    setPassword2(newPassword2);
+  }
+
+  function handleSubmit(event: { preventDefault: () => void; }) {
+    event.preventDefault();
+    const passwordsMatch = password1 === password2;
+
+    if (passwordsMatch) {
+      alert("Senha alterada com sucesso!");
+      setShowModal(false);
+      setPassword2("");
+      setPassword1("");
+      // Aqui você pode fazer algo com as senhas, como enviar para o servidor
+    } else {
+      alert('As senhas devem ser iguais!');
+    }
+  }
   return (
     <>
-        {!acessoPermitido && (
-          <>
-            <div className="container-verificar-user">
-              <label htmlFor="senha">
-                Área Administrativa:
-                <input
-                  id="senha"
-                  className="input-senha-verifica"
-                  placeholder="Digite sua senha"
-                  type="password"
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
-                />
-              </label>
-              <button className="botao-entrar-verifica" onClick={verificarSenha}>
-                Entrar
-              </button>
-            </div>
-          </>
-        )}
-        {acessoPermitido && (
-          <>
-
-            <button
-              className={"senhasTabela"}
-              onClick={() => {
-                setShowModal(true);
-                setSelectedPassword('');
-              }}>
-              SENHAS
+      {!acessoPermitido && (
+        <>
+          <div className="container-verificar-user">
+            <label htmlFor="senha">
+              Área Administrativa:
+              <input
+                id="senha"
+                className="input-senha-verifica"
+                placeholder="Digite sua senha"
+                type="password"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+              />
+            </label>
+            <button className="botao-entrar-verifica" onClick={verificarSenha}>
+              Entrar
             </button>
-
-            <div className='divVisitantesTable'>
-              <h1>Tabela de Visitantes</h1>
-              <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>
-              <input type="date" id="data" name="data" value={dataSelecionada > 0 ? new Date(dataSelecionada).toISOString().substr(0, 10) : ''} onChange={handleDataChange} />
-            </div>
-            {showModal && (
-              <div className="modalTabelaSenha">
-                <div className="modalTabelaSenha-content">
-                  <span className="modalTabelaSenha-close" onClick={() => setShowModal(false)}>
-                    &times;
-                  </span>
-                  <div className="containerSenha">
-                    <label htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
-                    <select
-                      className='containerSenhaSelect'
-                      style={{ marginLeft: "10px" }}
-                      value={selectedPassword}
-                      onChange={(event) => setSelectedPassword(event.target.value)}
-                      id="select-senhas">
-                      <option className='containerSenhaOption'>Selecione...</option>
-                      <option className='containerSenhaOption'>App Boas Vindas</option>
-                      <option className='containerSenhaOption'>DashBoard</option>
-                    </select>
-                    {selectedPassword === 'App Boas Vindas' && (
-                      <>
-                        <div className='respostaSenha'>
-                          <label className='containerSenhaLabel' htmlFor="nova-senha">Nova senha:</label>
-                          <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
-                          <label className='containerSenhaLabel' htmlFor="confirmar-senha">Confirme:</label>
-                          <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
-                        </div>
-                      </>
-                    )}
-                    {selectedPassword === 'DashBoard' && (
-                      <>
-                        <div className='respostaSenha'>
-                          <label className='containerSenhaLabel' htmlFor="nova-senha">Nova senha:</label>
-                          <input className='containerSenhaSenha' type="password" name="novaSenha" id="nova-senha" />
-                          <label className='containerSenhaLabel' htmlFor="confirmar-senha">Confirme:</label>
-                          <input className='containerSenhaSenha' type="password" name="confirmarSenha" id="confirmar-senha" />
-                        </div>
-                      </>
-                    )}
-                  </div>
+          </div>
+        </>
+      )}
+      {acessoPermitido && (
+        <>
+          <button
+            className={"senhasTabela"}
+            onClick={() => {
+              setShowModal(true);
+              setSelectedPassword('');
+            }}>
+            SENHAS
+          </button>
+          <div className='divVisitantesTable'>
+            <h1>Tabela de Visitantes</h1>
+            <label className='tabelaVisitantesLabel' htmlFor="data">Qual Culto você deseja visualizar?</label>
+            <input type="date" id="data" name="data" value={dataSelecionada > 0 ? new Date(dataSelecionada).toISOString().substr(0, 10) : ''} onChange={handleDataChange} />
+          </div>
+          {showModal && (
+            <div className="modalTabelaSenha">
+              <div className="modalTabelaSenha-content">
+                <span className="modalTabelaSenha-close" onClick={() => setShowModal(false)}>
+                  &times;
+                </span>
+                <div className="containerSenha">
+                  <label htmlFor="select-senhas">Selecione qual das senhas você deseja alterar:</label>
+                  <select
+                    className='containerSenhaSelect'
+                    style={{ marginLeft: "10px" }}
+                    value={selectedPassword}
+                    onChange={(event) => setSelectedPassword(event.target.value)}
+                    id="select-senhas">
+                    <option className='containerSenhaOption'>Selecione...</option>
+                    <option className='containerSenhaOption'>App Boas Vindas</option>
+                    <option className='containerSenhaOption'>DashBoard</option>
+                  </select>
+                  {selectedPassword === 'App Boas Vindas' && (
+                    <>
+                      <div className='respostaSenha'>
+                        <form onSubmit={handleSubmit}>
+                          <label>
+                            Senha:
+                            <input type="password" value={password1} onChange={handlePassword1Change} />
+                          </label>
+                          <label>
+                            Confirme a senha:
+                            <input type="password" value={password2} onChange={handlePassword2Change} />
+                          </label>
+                          <button type="submit">Enviar</button>
+                        </form>
+                      </div>
+                    </>
+                  )}
+                  {selectedPassword === 'DashBoard' && (
+                    <>
+                      <div className='respostaSenha'>
+                        <form onSubmit={handleSubmit}>
+                          <label>
+                            Senha:
+                            <input type="password" value={password1} onChange={handlePassword1Change} />
+                          </label>
+                          <label>
+                            Confirme a senha:
+                            <input type="password" value={password2} onChange={handlePassword2Change} />
+                          </label>
+                          <button type="submit">Enviar</button>
+                        </form>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
-            )}
-            {dataSelecionada > 0 && (
-              <div>
-                <h2>Total de pessoas nesse Culto: {contagemSelecionada}</h2>
-              </div>
-            )}
-            <table className='tabelaDiv'>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>WhatsApp</th>
-                  <th>Bairro</th>
-                  <th>Culto</th>
-                  <th>Como Conheceu o Bola?</th>
+            </div>
+          )}
+          {dataSelecionada > 0 && (
+            <div>
+              <h2>Total de pessoas nesse Culto: {contagemSelecionada}</h2>
+            </div>
+          )}
+          <table className='tabelaDiv'>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>WhatsApp</th>
+                <th>Bairro</th>
+                <th>Culto</th>
+                <th>Como Conheceu o Bola?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {formularios.map((formulario) => (
+                <tr key={formulario.id}>
+                  <td>{formulario.nome}</td>
+                  <td>{formulario.email}</td>
+                  <td>
+                    <a
+                      href={`https://api.whatsapp.com/send?phone=${formulario.whatsApp}&text=Olá%20Somos%20do%20Bola%20de%20Neve%20Sorocaba,%20estamos%20entrando%20em%20contato%20pois%20você%20nos%20deu%20o%20seu%20contato.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className='linkTabela'
+                    >{formulario.whatsApp}<WhatsAppIcon sx={{ marginLeft: '10px' }} fontSize='medium' />
+                    </a>
+                  </td>
+                  <td>{formulario.bairro}</td>
+                  <td>{formulario.perguntaCulto}</td>
+                  <td>{formulario.pergunta}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {formularios.map((formulario) => (
-                  <tr key={formulario.id}>
-                    <td>{formulario.nome}</td>
-                    <td>{formulario.email}</td>
-                    <td>
-                      <a
-                        href={`https://api.whatsapp.com/send?phone=${formulario.whatsApp}&text=Olá%20Somos%20do%20Bola%20de%20Neve%20Sorocaba,%20estamos%20entrando%20em%20contato%20pois%20você%20nos%20deu%20o%20seu%20contato.`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className='linkTabela'
-                      >{formulario.whatsApp}<WhatsAppIcon sx={{ marginLeft: '10px' }} fontSize='medium' />
-                      </a>
-                    </td>
-                    <td>{formulario.bairro}</td>
-                    <td>{formulario.perguntaCulto}</td>
-                    <td>{formulario.pergunta}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        )}
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
     </>
   );
 }
