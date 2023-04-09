@@ -153,7 +153,7 @@ function TabelaFormularios() {
                             Confirme a senha:
                             <input type="password" value={password2} onChange={e => setPassword2(e.target.value)} />
                           </label>
-                          <button type="submit">Enviar</button>
+                          <button className='salvarSenhaTabela' type="submit">Trocar Senha</button>
                         </form>
                       </div>
                     </>
@@ -162,7 +162,7 @@ function TabelaFormularios() {
                     <>
                       <div className='respostaSenha'>
                         <form onSubmit={handleSubmit}>
-                          <label>
+                          <label className='containerSenhaOption'>
                             Senha:
                             <input type="password" value={password1} onChange={e => setPassword1(e.target.value)} />
                           </label>
@@ -170,7 +170,7 @@ function TabelaFormularios() {
                             Confirme a senha:
                             <input type="password" value={password2} onChange={e => setPassword2(e.target.value)} />
                           </label>
-                          <button type="submit">Enviar</button>
+                          <button className='salvarSenhaTabela' type="submit">Trocar Senha</button>
                         </form>
                       </div>
                     </>

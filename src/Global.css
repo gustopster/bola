@@ -498,20 +498,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: #1f1f1f;
 }
 
-.containerSenhaSenha {
-    display: grid;
-    margin-left: 10px;
-    font-size: 16px;
-    background-color: #2b2b2be3;
-    color: #fff;
+.respostaSenha{
+    margin-top: 16px;
+    background-color: rgba(0, 0, 0, 0.34);
+    border-radius: 10px;
+}
+.salvarSenhaTabela{
+    margin-top: 20px;
+    background-color: #3cba54;
+    color: white;
+    padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
-    width: 80%;
-}
-.respostaSenha{
-    margin-top: 5vh;
-}
-.containerSenhaLabel{
-    margin-right: 75%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    padding: 18px;
 }
