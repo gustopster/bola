@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MenuHamburger from "./Components/MenuHambuger.tsx";
 import Contador from "./Pages/Contador/Contador";
 import Home from "./Pages/Home/Home";
@@ -9,17 +9,23 @@ import { DocumentData } from "firebase/firestore";
 import TabelaFormularios from "./Pages/TabelaFormularios/TabelaFormularios";
 
 export default function AppsBola() {
+  const [usersApp, setUsersApp] = useState<string>("");
   const [textoDoMenu, setTextoDoMenu] = useState<string>("");
-  const [senha, setSenha] = useState<string>("");
   const [modalAberto, setModalAberto] = useState<boolean>(false);
   const [inputSenha, setInputSenha] = useState<string>("");
   const [botaoLoginVisivel, setBotaoLoginVisivel] = useState<boolean>(true);
 
+  useEffect(() => {
+    async function carregarUsuarios() {
+      const users: DocumentData | undefined = await usuarios;
+      setUsersApp(users?.["App-Boas-Vindas"]);
+    }
+    carregarUsuarios();
+  }, []);
+
   async function handleEntrar() {
-    const users: DocumentData | undefined = await usuarios;
     // Aqui você pode fazer outras validações, como verificar se a senha é válida
-    if (inputSenha === users?.[`App-Boas-Vindas`]) {
-      setSenha(inputSenha);
+    if (inputSenha === usersApp) {
       setModalAberto(false);
       setBotaoLoginVisivel(false);
     } else {
@@ -48,11 +54,11 @@ export default function AppsBola() {
           />
           <div className="containerLogin">
             <button className="fecharLogin"
-            onClick={() => {
-              setModalAberto(false);
-            }} >
-            Fechar
-          </button>
+              onClick={() => {
+                setModalAberto(false);
+              }} >
+              Fechar
+            </button>
             <button
               className="botao-entrar"
               onClick={(e) => {
@@ -68,9 +74,9 @@ export default function AppsBola() {
       <MenuHamburger onTextoDoMenuChange={setTextoDoMenu} />
       {(textoDoMenu === "Home" || textoDoMenu === "") && <Home />}
       {textoDoMenu === "Obreiros" && <Obreiros />}
-      {senha === inputSenha && textoDoMenu === "Contador" && <Contador />}
-      {senha === inputSenha && textoDoMenu === "Visitantes" && <Visitantes />}
-      {senha === inputSenha && textoDoMenu === "DashBoard" && <TabelaFormularios />}
+      {inputSenha === usersApp && textoDoMenu === "Contador" && <Contador />}
+      {inputSenha === usersApp && textoDoMenu === "Visitantes" && <Visitantes />}
+      {inputSenha === usersApp && textoDoMenu === "DashBoard" && <TabelaFormularios />}
     </>
   );
 }

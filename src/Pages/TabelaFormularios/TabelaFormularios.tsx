@@ -6,6 +6,14 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { userType } from '../../types/User';
 
 function TabelaFormularios() {
+  const [usersApp, setUsersApp] = useState<string>("");
+  useEffect(() => {
+    async function carregarUsuarios() {
+      const users: DocumentData | undefined = await usuarios;
+      setUsersApp(users?.DashBoard);
+    }
+    carregarUsuarios();
+  }, []);
   const [formularios, setFormularios] = useState<TabelaFormulario[]>([]);
   const [dataSelecionada, setDataSelecionada] = useState<number>(0); // inicializa com valor 0
   const handleDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
