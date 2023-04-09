@@ -13,6 +13,7 @@ const MINISTRIES = [
   "Intercessão",
   "Lojinha",
   "Louvor",
+  "Som",
   "Zeladoria",
 ];
 

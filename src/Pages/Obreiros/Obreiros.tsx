@@ -14,6 +14,7 @@ const Obreiros = () => {
   const [intercessão, setIntercessão] = useState<number>(0);
   const [lojinha, setLojinha] = useState<number>(0);
   const [louvor, setLouvor] = useState<number>(0);
+  const [som, setSom] = useState<number>(0);
   const [zeladoria, setZeladoria] = useState<number>(0);
 
   useEffect(() => {
@@ -29,14 +30,15 @@ const Obreiros = () => {
         setDiaconia(data.Diaconia);
         setIntercessão(data.Intercessão);
         setLojinha(data.Lojinha);
-        setLouvor(data.Lojinha);
+        setLouvor(data.Louvor);
+        setSom(data.Som);
         setZeladoria(data.Zeladoria);
       }
     }
     getConfig();
   }, []);
   return (
-    <Ministerios BoasVindas={boasVindas} Lojinha={lojinha} Intercessão={intercessão} Zeladoria={zeladoria} Atalaia={atalaia} Cantina={cantina} Diaconia={cantina} Louvor={louvor} Assistência={assistencia} Bolinha={bolinha} />
+    <Ministerios BoasVindas={boasVindas} Lojinha={lojinha} Intercessão={intercessão} Zeladoria={zeladoria} Atalaia={atalaia} Cantina={cantina} Diaconia={cantina} Louvor={louvor} Assistência={assistencia} Bolinha={bolinha} Som={som} />
   );
 }
 
