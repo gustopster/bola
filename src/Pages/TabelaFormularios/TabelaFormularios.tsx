@@ -57,6 +57,7 @@ function TabelaFormularios() {
       setAcessoPermitido(true);
     } else {
       alert('Senha incorreta. Por favor, entre em contato com o líder do ministério para obter acesso.');
+      setSenha("");
     }
   }
   const [password1, setPassword1] = useState('');

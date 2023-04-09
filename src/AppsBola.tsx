@@ -25,6 +25,7 @@ export default function AppsBola() {
     } else {
       setModalAberto(false);
       alert("Senha incorreta");
+      setInputSenha("");
     }
   }
 
