@@ -67,9 +67,9 @@ export default function AppsBola() {
       <MenuHamburger onTextoDoMenuChange={setTextoDoMenu} />
       {(textoDoMenu === "Home" || textoDoMenu === "") && <Home />}
       {textoDoMenu === "Obreiros" && <Obreiros />}
-      {senha === "" && textoDoMenu === "Contador" && <Contador />}
-      {senha === "" && textoDoMenu === "Visitantes" && <Visitantes />}
-      {senha === "" && textoDoMenu === "DashBoard" && <TabelaFormularios />}
+      {senha === inputSenha && textoDoMenu === "Contador" && <Contador />}
+      {senha === inputSenha && textoDoMenu === "Visitantes" && <Visitantes />}
+      {senha === inputSenha && textoDoMenu === "DashBoard" && <TabelaFormularios />}
     </>
   );
 }
