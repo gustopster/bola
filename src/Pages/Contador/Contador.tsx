@@ -26,6 +26,7 @@ const Contador = () => {
     "Diaconia": 0,
     "Louvor": 0,
     "Assistência": 0,
+    "Som": 0,
     "Bolinha": 0
   });
   const totalObreiros = somarPropriedadesNumericas(obreiros);
@@ -56,9 +57,9 @@ const Contador = () => {
     const confirmacao = window.confirm('Tem certeza que deseja resetar o número de pessoas?');
     if (confirmacao) {
       // salvar os dados antes de resetar
-      const dadosAntesDoReset = { 
-        resultado: pessoas + totalObreiros, 
-        createdAt: serverTimestamp(), 
+      const dadosAntesDoReset = {
+        resultado: pessoas + totalObreiros,
+        createdAt: serverTimestamp(),
       };
       await addDoc(collection(dadosFirebase, "dadosAntesDoReset"), dadosAntesDoReset);
 
@@ -74,6 +75,7 @@ const Contador = () => {
         "Diaconia": 0,
         "Louvor": 0,
         "Assistência": 0,
+        "Som": 0,
         "Bolinha": 0
       }
       updateDoc(doc(dadosFirebase, "contagemPessoas", "contador"), novosDadosPessoas)
@@ -105,7 +107,7 @@ const Contador = () => {
             setPessoas(pessoas + 1);
             enviarContagem();
           }}>
-            Click para contar
+            Click para Contar
           </button>
         </div>
         <div>
