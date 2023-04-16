@@ -12,5 +12,15 @@ const getAll = async () => {
         return data;
     }
 }
+const getApiKey = async () => {
+    
+    const snapshot = await getDoc(doc(dadosFirebase, "chat", "gpt"));
+    const data = snapshot.data();
+    if (data !== undefined) {
+        /* console.log(data) */
+        return data;
+    }
+}
+export const apiKey = getApiKey();
 export const usuarios = getAll();
 export { dadosFirebase };
