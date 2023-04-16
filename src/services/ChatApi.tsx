@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const openaiApiKey = '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';
+const openaiApiKey = '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';
 const modelId = 'text-davinci-003';
 
 async function generateChatCompletion(prompt: string) {
