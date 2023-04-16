@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { apiKey } from './firebaseServer';
 
-const openaiApiKey = await apiKey;
 const modelId = 'text-davinci-003';
 async function generateChatCompletion(prompt: string) {
+  const openaiApiKey = await apiKey;
   const response = await axios.post(
     `https://api.openai.com/v1/engines/${modelId}/completions`,
     {
