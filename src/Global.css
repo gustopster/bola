@@ -32,7 +32,7 @@ input[type=number]::-webkit-clear-button {
     display: inline-flexbox;
     position: absolute;
     padding: 0.5%;
-    margin-top: 25vh;
+    margin-top: 5vh;
     width: 95%;
 }
 
@@ -475,6 +475,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-decoration: none;
     cursor: pointer;
 }
+
 .containerSenha {
     background-color: #1f1f1f;
     color: #fff;
@@ -498,12 +499,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: #1f1f1f;
 }
 
-.respostaSenha{
+.respostaSenha {
     margin-top: 16px;
     background-color: rgba(0, 0, 0, 0.34);
     border-radius: 10px;
 }
-.salvarSenhaTabela{
+
+.salvarSenhaTabela {
     margin-top: 20px;
     background-color: #3cba54;
     color: white;
@@ -515,4 +517,79 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     width: 100%;
     padding: 18px;
+}
+
+
+/* Estilos para o chat box */
+.chat-box {
+    padding: 10px;
+    border-radius: 14px;
+    background-color: #0c0c0cf0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-boxform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chat-box-button {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.chat-box-button:hover{
+    background-color: #29AB87;
+    color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.16);
+}
+.chat-box-input {
+    width: 220px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.loader {
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    border-top-color: #333;
+    animation: spin 1s linear infinite;
+    position: relative;
+    top: 0px;
+}
+.response-text{
+    line-height: 1.7rem;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 16px;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

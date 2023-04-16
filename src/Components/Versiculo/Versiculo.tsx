@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ChatBox from '../ChatBox/ChatBox';
 import bibliaLivreData from "./biblialivre.json";
 
 interface BibliaLivre {
@@ -33,6 +34,7 @@ function Versiculo() {
       <h1>Seu Versículo</h1>
       <h2> Livro de: {referencia}</h2>
       <h3>{versiculo}</h3>
+      <ChatBox />
     </div>
   );
 }
